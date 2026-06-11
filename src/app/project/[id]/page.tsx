@@ -396,8 +396,17 @@ export default function ProjectPage() {
       <header className="border-b border-border/50 bg-card/50 backdrop-blur sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <a
+              href="https://buhtig-sudo-azar.github.io/folio-portfolio/projects/"
+              rel="noopener noreferrer"
+            >
+              <Button variant="ghost" size="sm" className="gap-1.5 text-xs hover:bg-primary/5 hover:text-primary transition-all duration-200 -ml-1">
+                <ArrowLeft className="h-3.5 w-3.5" /> Портфолио
+              </Button>
+            </a>
+            <div className="h-5 w-px bg-border" />
             <Button variant="ghost" size="sm" onClick={() => router.push("/")}>
-              <ArrowLeft className="h-4 w-4 mr-1" /> Главная
+              Главная
             </Button>
             <div className="h-5 w-px bg-border" />
             <Badge variant="outline" className="text-xs">

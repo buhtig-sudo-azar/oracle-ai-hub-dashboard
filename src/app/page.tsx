@@ -67,6 +67,7 @@ import {
   Download,
   Copy,
   Check,
+  ArrowLeft,
 } from "lucide-react";
 
 import {
@@ -1495,6 +1496,16 @@ export default function DashboardPage() {
               </p>
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              {/* Back to Portfolio */}
+              <a
+                href="https://buhtig-sudo-azar.github.io/folio-portfolio/projects/"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex"
+              >
+                <Button variant="outline" size="sm" className="gap-1.5 text-xs hover:bg-primary/5 hover:border-primary/30 hover:text-primary transition-all duration-200">
+                  <ArrowLeft className="h-3.5 w-3.5" /> Портфолио
+                </Button>
+              </a>
               {/* Theme toggle */}
               {mounted && (
                 <Button
@@ -1535,6 +1546,14 @@ export default function DashboardPage() {
           {/* Mobile menu */}
           {mobileMenuOpen && (
             <div className="sm:hidden mt-3 pt-3 border-t border-border/50 flex items-center gap-2">
+              <a
+                href="https://buhtig-sudo-azar.github.io/folio-portfolio/projects/"
+                rel="noopener noreferrer"
+              >
+                <Button variant="outline" size="sm" className="gap-1.5 text-xs hover:bg-primary/5 hover:border-primary/30 hover:text-primary transition-all duration-200">
+                  <ArrowLeft className="h-3.5 w-3.5" /> Портфолио
+                </Button>
+              </a>
               <a
                 href="https://github.com/oracle-devrel/oracle-ai-developer-hub"
                 target="_blank"
