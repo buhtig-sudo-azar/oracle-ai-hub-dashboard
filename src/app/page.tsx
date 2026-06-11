@@ -1577,17 +1577,17 @@ export default function DashboardPage() {
 
         {/* Tabs */}
         <Tabs value={tab} onValueChange={setTab} className="space-y-4">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="apps" className="gap-1 text-xs sm:text-sm px-2 sm:px-3">
+          <TabsList className="flex w-full overflow-x-auto sm:grid sm:grid-cols-4 sm:overflow-visible">
+            <TabsTrigger value="apps" className="gap-1 text-xs sm:text-sm px-2 sm:px-3 whitespace-nowrap flex-shrink-0 sm:flex-shrink">
               <Cpu className="h-3.5 w-3.5 shrink-0" /> Приложения ({projects.filter((p) => p.category === "app").length})
             </TabsTrigger>
-            <TabsTrigger value="workshops" className="gap-1 text-xs sm:text-sm px-2 sm:px-3">
+            <TabsTrigger value="workshops" className="gap-1 text-xs sm:text-sm px-2 sm:px-3 whitespace-nowrap flex-shrink-0 sm:flex-shrink">
               <GraduationCap className="h-3.5 w-3.5 shrink-0" /> Воркшопы ({workshops.length})
             </TabsTrigger>
-            <TabsTrigger value="notebooks" className="gap-1 text-xs sm:text-sm px-2 sm:px-3">
+            <TabsTrigger value="notebooks" className="gap-1 text-xs sm:text-sm px-2 sm:px-3 whitespace-nowrap flex-shrink-0 sm:flex-shrink">
               <BookOpen className="h-3.5 w-3.5 shrink-0" /> Ноутбуки ({notebooks.length})
             </TabsTrigger>
-            <TabsTrigger value="explorer" className="gap-1 text-xs sm:text-sm px-2 sm:px-3">
+            <TabsTrigger value="explorer" className="gap-1 text-xs sm:text-sm px-2 sm:px-3 whitespace-nowrap flex-shrink-0 sm:flex-shrink">
               <Brain className="h-3.5 w-3.5 shrink-0" /> Explorer
             </TabsTrigger>
           </TabsList>
