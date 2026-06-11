@@ -1114,13 +1114,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <FileSearch className="h-3 w-3" /> Открыть проект
             </Button>
           </Link>
-          {project.liveUrl && (
-            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-              <Button size="sm" className="gap-1.5 text-xs">
-                <Globe className="h-3 w-3" /> Открыть Live
-              </Button>
-            </a>
-          )}
+
           <a
             href={`https://github.com/oracle-devrel/oracle-ai-developer-hub/tree/main/${project.githubPath}`}
             target="_blank"
