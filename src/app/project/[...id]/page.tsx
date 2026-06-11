@@ -420,7 +420,7 @@ function runnabilityBadge(r: "fully_local" | "partial_local" | "cloud_required")
 export default function ProjectPage() {
   const params = useParams();
   const router = useRouter();
-  const projectId = params.id as string;
+  const projectId = Array.isArray(params.id) ? params.id.join("/") : (params.id as string);
 
   const [project, setProject] = useState<ProjectData | null>(null);
   const [loading, setLoading] = useState(true);
