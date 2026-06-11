@@ -52,3 +52,7 @@ prompt
 server.log
 # Skills directory
 /skills/
+# Cloned repo (not needed for deployment)
+/oracle-ai-developer-hub/
+# Work logs
+worklog.md
