@@ -641,7 +641,7 @@ const notebooks = [
   },
   {
     id: "oracle-langchain-example",
-    name: "Oracle LangChain Example",
+    name: "Пример Oracle LangChain",
     description: "Пример использования LangChain с Oracle AI Database — эмбеддинги, векторный поиск, RAG пайплайн",
     stack: ["Oracle AI DB", "langchain-oracledb", "HuggingFace"],
     filePath: "notebooks/oracle_langchain_example.ipynb",
@@ -1043,9 +1043,9 @@ function DependencyRadar({ project }: { project: Project }) {
   const deps = [
     { name: "Oracle DB", needed: project.requiresOracleDB },
     { name: "OCI Cloud", needed: project.requiresOCI },
-    { name: "LLM API Key", needed: project.requiresLLMAPI },
+    { name: "Ключ LLM API", needed: project.requiresLLMAPI },
     { name: "Ollama", needed: project.requiresOllama },
-    { name: "Local LLM", needed: project.localLLM },
+    { name: "Локальный LLM", needed: project.localLLM },
     { name: "Web UI", needed: project.hasWebUI },
   ];
 

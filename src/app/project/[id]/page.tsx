@@ -193,6 +193,51 @@ const projectMeta: Record<string, ProjectMeta> = {
     features: ["Информационная страница", "Описание Oracle Vector DB"],
     architecture: "N/A — маркетинговая страница",
   },
+  "ir-to-rag": {
+    name: "Поиск информации до RAG",
+    description: "Постройте ассистента для научных статей по 200 ArXiv-статьям, реализуя 5 стратегий поиска и полный RAG-пайплайн.",
+    longDescription: "Воркшоп по построению полного пайплайна информационного поиска и RAG с Oracle AI Database и OCI GenAI. Вы создадите ассистента для научных статей, реализуете пять стратегий поиска (ключевой, векторный, гибридный, графовый) и построите сквозной RAG-пайплайн.",
+    stack: ["Oracle AI DB", "sentence-transformers", "OCI GenAI"],
+    runnability: "partial_local", hasWebUI: false, requiresOracleDB: true, requiresOCI: false, requiresLLMAPI: false, requiresOllama: false, localLLM: false,
+    features: ["5 стратегий поиска", "200 ArXiv-статей", "Oracle Text + HNSW + Graph", "OCI GenAI (Grok 3 Fast)", "Jupyter Notebook", "Docker Compose"],
+    architecture: "HuggingFace → sentence-transformers → Oracle AI DB (Vector + Text + Graph) → OCI GenAI",
+  },
+  "rag-to-agents": {
+    name: "От RAG к агентам",
+    description: "Расширьте RAG-пайплайн до мульти-агентной системы с оркестрацией и персистентной памятью на Oracle.",
+    longDescription: "Воркшоп по расширению RAG-пайплайна до полноценной мульти-агентной системы. Вы реализуете пять стратегий поиска, построите RAG-пайплайн, обернёте поиск как инструменты агента, создадите мульти-агентную оркестрацию и добавите персистентную память на Oracle AI Database.",
+    stack: ["Oracle AI DB", "OpenAI API", "openai-agents"],
+    runnability: "cloud_required", hasWebUI: false, requiresOracleDB: true, requiresOCI: false, requiresLLMAPI: true, requiresOllama: false, localLLM: false,
+    features: ["8 частей воркшопа", "RAG + Агенты + Память", "OpenAI Agents SDK", "Мульти-агентная оркестрация", "Персистентная сессия", "Oracle Session Memory"],
+    architecture: "Oracle AI DB → RAG → Agent Tools → Orchestration → Session Memory",
+  },
+  "agent-memory-ws": {
+    name: "Воркшоп по памяти агента",
+    description: "Постройте агентов с памятью: реализуйте MemoryManager с 6 типами памяти в Oracle, примените context-engineering техники.",
+    longDescription: "Воркшоп по построению агентов с персистентной памятью на Oracle AI Database. Вы реализуете MemoryManager с шестью типами памяти, примените техники контекстной инженерии и создадите агентов с долгосрочной памятью.",
+    stack: ["Oracle AI DB", "langchain-oracledb", "OCI GenAI", "Tavily"],
+    runnability: "cloud_required", hasWebUI: false, requiresOracleDB: true, requiresOCI: false, requiresLLMAPI: false, requiresOllama: false, localLLM: false,
+    features: ["6 типов памяти", "MemoryManager", "Контекстная инженерия", "Oracle AI DB хранилище", "OCI GenAI интеграция", "Tavily web search"],
+    architecture: "MemoryManager → 6 Memory Stores → Oracle AI DB + OCI GenAI + Tavily",
+  },
+  "enterprise-harness": {
+    name: "Каркас корпоративного агента данных",
+    description: "Постройте enterprise data agent на Oracle AI DB 26ai с OAMP, hybrid search, JSON Duality Views и Deep Data Security.",
+    longDescription: "Воркшоп по построению корпоративного агента данных на Oracle AI Database 26ai. Включает OAMP, гибридный поиск, JSON Duality Views, Deep Data Security и DBMS_SCHEDULER. Живой Flask + React интерфейс.",
+    stack: ["Oracle AI DB 26ai", "OAMP", "Flask", "React"],
+    runnability: "cloud_required", hasWebUI: true, requiresOracleDB: true, requiresOCI: false, requiresLLMAPI: true, requiresOllama: false, localLLM: false,
+    features: ["OAMP протокол", "Гибридный поиск", "JSON Duality Views", "Deep Data Security", "Flask + React UI", "DBMS_SCHEDULER"],
+    architecture: "React UI → Flask → Oracle AI DB 26ai (Vector + JSON Duality + Security)",
+  },
+  "supplychain-ws": {
+    name: "Агент спроса в цепочке поставок",
+    description: "Мульти-агентный помощник с LangGraph supervisor, векторными знаниями и семантическим кэшем. FastAPI + React чат.",
+    longDescription: "Воркшоп по мульти-агентной системе планирования спроса с LangGraph supervisor. Векторные знания, долгосрочная память, чекпоинты и семантический кэш — всё в Oracle AI Database. FastAPI + React чат с анимированной топологией.",
+    stack: ["Oracle AI DB", "LangGraph", "FastAPI", "React"],
+    runnability: "cloud_required", hasWebUI: true, requiresOracleDB: true, requiresOCI: false, requiresLLMAPI: true, requiresOllama: false, localLLM: false,
+    features: ["LangGraph supervisor", "2 specialist агента", "Анимированная топология", "Семантический LLM-кэш", "Чекпоинты на поток", "FastAPI + React UI"],
+    architecture: "React UI → FastAPI → LangGraph Supervisor → Specialists → Oracle AI DB",
+  },
 };
 
 /* ------------------------------------------------------------------ */
@@ -250,41 +295,79 @@ function getFileIcon(name: string, type: "file" | "directory") {
 
 function renderMarkdown(md: string, githubUrl?: string): string {
   let html = md;
+  
   // Remove shield.io badge images
   html = html.replace(/<img[^>]*shields\.io[^>]*>/g, '');
-  // Fenced code blocks with language label
+  
+  // Fenced code blocks with language label and copy hint
   html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (_m, lang, code) => {
-    const langLabel = lang ? `<div class="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-semibold px-4 pt-3 pb-1 border-b border-border/30 bg-muted/30 rounded-t-lg">${lang}</div>` : '';
+    const langLabel = lang 
+      ? `<div class="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-semibold px-4 pt-3 pb-1 border-b border-border/30 bg-muted/30 rounded-t-lg flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-primary/50"></span>${lang}</div>` 
+      : '';
     const preClass = lang ? 'rounded-t-none' : 'rounded-lg';
-    return `<div class="my-4 rounded-lg border border-border/40 overflow-hidden shadow-sm">${langLabel}<pre class="bg-muted/50 ${preClass} p-4 overflow-x-auto text-sm leading-relaxed"><code class="language-${lang || "text"}">${escapeHtml(code.trim())}</code></pre></div>`;
+    return `<div class="my-5 rounded-lg border border-border/40 overflow-hidden shadow-sm bg-muted/20">${langLabel}<pre class="bg-muted/50 ${preClass} p-4 overflow-x-auto text-sm leading-relaxed"><code class="language-${lang || "text"}">${escapeHtml(code.trim())}</code></pre></div>`;
   });
+  
   // Inline code
   html = html.replace(/`([^`]+)`/g, '<code class="bg-primary/10 text-primary px-1.5 py-0.5 rounded-md text-[13px] font-mono border border-primary/10">$1</code>');
+  
+  // Tables - convert markdown tables to styled HTML
+  html = html.replace(/^(\|.+\|)\n(\|[\s:|-]+\|)\n((?:\|.+\|\n?)*)/gm, (_match, headerRow, _sep, bodyRows) => {
+    const headers = headerRow.split('|').filter((c: string) => c.trim()).map((c: string) => c.trim());
+    const headerCells = headers.map((h: string) => `<th class="px-4 py-2.5 text-left text-xs font-semibold text-foreground/80 bg-muted/40 border-b border-border/30">${h}</th>`).join('');
+    
+    const rows = bodyRows.trim().split('\n').filter((r: string) => r.trim()).map((row: string, idx: number) => {
+      const cells = row.split('|').filter((c: string) => c.trim()).map((c: string) => c.trim());
+      const cellHtml = cells.map((c: string) => `<td class="px-4 py-2 text-sm text-foreground/70">${c}</td>`).join('');
+      const bgClass = idx % 2 === 0 ? 'bg-transparent' : 'bg-muted/15';
+      return `<tr class="${bgClass}">${cellHtml}</tr>`;
+    }).join('');
+    
+    return `<div class="my-5 overflow-x-auto rounded-lg border border-border/30 shadow-sm"><table class="w-full"><thead><tr>${headerCells}</tr></thead><tbody>${rows}</tbody></table></div>`;
+  });
+  
+  // Blockquotes
+  html = html.replace(/^>\s?(.+)$/gm, '<blockquote class="border-l-3 border-primary/40 pl-4 py-1 my-3 text-foreground/60 text-sm italic bg-primary/5 rounded-r-lg">$1</blockquote>');
+  
   // Headings with decorative accents
-  html = html.replace(/^### (.+)$/gm, '<h3 class="text-base font-semibold mt-6 mb-2 text-foreground flex items-center gap-2"><span class="h-1 w-4 rounded-full bg-primary/60 shrink-0"></span>$1</h3>');
+  html = html.replace(/^### (.+)$/gm, '<h3 class="text-base font-semibold mt-7 mb-2.5 text-foreground flex items-center gap-2"><span class="h-1 w-5 rounded-full bg-gradient-to-r from-primary/60 to-primary/20 shrink-0"></span>$1</h3>');
   html = html.replace(/^## (.+)$/gm, '<h2 class="text-lg font-bold mt-8 mb-3 text-foreground pb-2 border-b border-primary/15">$1</h2>');
   html = html.replace(/^# (.+)$/gm, '<h1 class="text-2xl font-bold mt-6 mb-4 text-foreground">$1</h1>');
+  
   // Bold and italic
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-foreground">$1</strong>');
   html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  
   // Links — resolve relative links to GitHub
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_m, text, url) => {
     let resolvedUrl = url;
     if (githubUrl && !url.startsWith('http://') && !url.startsWith('https://') && !url.startsWith('#') && !url.startsWith('mailto:')) {
       resolvedUrl = `${githubUrl}/${url.replace(/^\.\//, '')}`;
     }
-    return `<a href="${resolvedUrl}" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-primary/80 underline decoration-primary/30 hover:decoration-primary/60 underline-offset-2 transition-colors">${text}</a>`;
+    return `<a href="${resolvedUrl}" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-primary/80 underline decoration-primary/30 hover:decoration-primary/60 underline-offset-2 transition-colors inline-flex items-center gap-1">${text}<svg class="h-3 w-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>`;
   });
+  
   // Images → placeholder
   html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<span class="text-muted-foreground text-sm italic">[Изображение: $1]</span>');
+  
   // Horizontal rules
   html = html.replace(/^---$/gm, '<hr class="border-border/30 my-6" />');
-  // Unordered list items with custom bullet
+  
+  // Unordered list items - group consecutive items
+  html = html.replace(/((?:^<li class="ml-5 pl-1 list-none[^>]*>.+<\/li>\n?)+)/gm, (_match, items) => {
+    return `<ul class="my-3 space-y-1.5">${items}</ul>`;
+  });
   html = html.replace(/^[-*] (.+)$/gm, '<li class="ml-5 pl-1 list-none text-foreground/80 before:content-[\'•\'] before:text-primary before:absolute before:-ml-4 relative leading-relaxed">$1</li>');
-  // Ordered list items
+  
+  // Ordered list items - group consecutive items
+  html = html.replace(/((?:^<li class="ml-5 pl-1 list-decimal[^>]*>.+<\/li>\n?)+)/gm, (_match, items) => {
+    return `<ol class="my-3 space-y-1.5">${items}</ol>`;
+  });
   html = html.replace(/^\d+\. (.+)$/gm, '<li class="ml-5 pl-1 list-decimal text-foreground/80 marker:text-primary/60 leading-relaxed">$1</li>');
+  
   // Paragraphs — avoid wrapping already-tagged content
-  html = html.replace(/^(?!<[huplo]|<li|<hr|<pre|<code|<span|<strong|<em|<a|<div)(.+)$/gm, '<p class="text-foreground/70 leading-relaxed my-2">$1</p>');
+  html = html.replace(/^(?!<[huplo]|<li|<hr|<pre|<code|<span|<strong|<em|<a |<div|<table|<blockquote|<ul|<ol)(.+)$/gm, '<p class="text-foreground/75 leading-relaxed my-2.5">$1</p>');
+  
   return html;
 }
 
@@ -350,18 +433,70 @@ export default function ProjectPage() {
   const meta = projectMeta[projectId];
 
   useEffect(() => {
+    // First try individual JSON file
     fetch(`/data/${projectId}.json`)
       .then(res => {
-        if (!res.ok) throw new Error("Project not found");
+        if (!res.ok) throw new Error("not_found");
         return res.json();
       })
       .then(data => {
         setProject(data);
         setLoading(false);
       })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
+      .catch(() => {
+        // Fallback: look up in index.json
+        fetch(`/data/index.json`)
+          .then(res => res.json())
+          .then(index => {
+            const entry = index[projectId];
+            if (entry) {
+              // Construct a ProjectData from index entry
+              const githubRawBase = `https://raw.githubusercontent.com/oracle-devrel/oracle-ai-developer-hub/main/${entry.repoPath}`;
+              const readmeUrl = `${githubRawBase}/README.md`;
+              
+              // Fetch README content from GitHub
+              fetch(readmeUrl)
+                .then(r => r.ok ? r.text() : Promise.resolve(""))
+                .then(readmeText => {
+                  const projectData: ProjectData = {
+                    id: entry.id,
+                    repoPath: entry.repoPath,
+                    type: entry.type,
+                    readme: readmeText,
+                    fileTree: entry.fileTree || [],
+                    fullTree: entry.fileTree || [],
+                    files: {},
+                    stats: entry.stats || { totalFiles: 0 },
+                    githubUrl: entry.githubUrl,
+                  };
+                  setProject(projectData);
+                  setLoading(false);
+                })
+                .catch(() => {
+                  // Even if README fails, show what we have
+                  const projectData: ProjectData = {
+                    id: entry.id,
+                    repoPath: entry.repoPath,
+                    type: entry.type,
+                    readme: "",
+                    fileTree: entry.fileTree || [],
+                    fullTree: entry.fileTree || [],
+                    files: {},
+                    stats: entry.stats || { totalFiles: 0 },
+                    githubUrl: entry.githubUrl,
+                  };
+                  setProject(projectData);
+                  setLoading(false);
+                });
+            } else {
+              setError("Проект не найден");
+              setLoading(false);
+            }
+          })
+          .catch(() => {
+            setError("Проект не найден");
+            setLoading(false);
+          });
       });
   }, [projectId]);
 
