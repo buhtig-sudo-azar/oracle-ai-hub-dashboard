@@ -488,6 +488,44 @@ export default function ProjectPage() {
                   setProject(projectData);
                   setLoading(false);
                 });
+            } else if (projectId.includes("/")) {
+              // projectId looks like a file path (e.g., "docs/part-4-retrieval.md")
+              // Search through all index entries to find a workshop/app that contains this file
+              const allEntries = Object.values(index) as Array<{ id: string; repoPath: string; type: string; fileTree: Array<{ name: string; path: string; type: string }>; stats: { totalFiles: number }; githubUrl: string }>;
+              const firstSegment = projectId.split("/")[0];
+              
+              // Find entries that have a directory matching the first segment
+              const candidates = allEntries.filter(e => 
+                e.fileTree?.some(f => f.name === firstSegment && f.type === "directory")
+              );
+              
+              if (candidates.length > 0) {
+                // Try loading each candidate's JSON to find the exact file
+                const tryCandidate = (idx: number) => {
+                  if (idx >= candidates.length) {
+                    setError("Проект не найден");
+                    setLoading(false);
+                    return;
+                  }
+                  const candidate = candidates[idx];
+                  fetch(`/data/${candidate.id}.json`)
+                    .then(res => res.ok ? res.json() : null)
+                    .then(data => {
+                      if (data && data.files && data.files[projectId]) {
+                        // Found the file! Show this project with the file opened
+                        setProject(data);
+                        setLoading(false);
+                      } else {
+                        tryCandidate(idx + 1);
+                      }
+                    })
+                    .catch(() => tryCandidate(idx + 1));
+                };
+                tryCandidate(0);
+              } else {
+                setError("Проект не найден");
+                setLoading(false);
+              }
             } else {
               setError("Проект не найден");
               setLoading(false);
