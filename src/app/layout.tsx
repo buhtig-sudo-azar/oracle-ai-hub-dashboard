@@ -14,24 +14,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
+  title: "Oracle AI Developer Hub — Project Explorer",
+  description: "Interactive dashboard showcasing 15+ AI projects, notebooks, workshops, and guides from Oracle AI Developer Hub. Explore reasoning agents, RAG systems, vector search, and more.",
+  keywords: ["Oracle", "AI", "Developer Hub", "Agents", "RAG", "Vector Search", "LLM", "Reasoning"],
+  authors: [{ name: "Oracle DevRel" }],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
   },
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "Oracle AI Developer Hub",
+    description: "Explore 15+ AI projects from Oracle",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
   },
 };
 
