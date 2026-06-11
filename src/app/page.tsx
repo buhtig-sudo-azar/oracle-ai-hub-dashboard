@@ -59,6 +59,24 @@ import {
   Cloud,
 } from "lucide-react";
 
+import {
+  CoTChainWidget,
+  ToTTreeWidget,
+  ReActWidget,
+  SelfReflectionWidget,
+  ConsistencyWidget,
+  DecomposedWidget,
+  LeastToMostWidget,
+  RefinementWidget,
+  DebateWidget,
+  MCTSWidget,
+  AnalogicalWidget,
+  SocraticWidget,
+  MetaReasoningWidget,
+  StrategyComparisonWidget,
+  ArchitectureWidget,
+} from "@/components/widgets";
+
 /* ------------------------------------------------------------------ */
 /*  DATA                                                               */
 /* ------------------------------------------------------------------ */
@@ -84,6 +102,8 @@ interface Project {
   gradient: string;
   features: string[];
   architecture: string;
+  githubPath: string;
+  liveUrl?: string;
 }
 
 const projects: Project[] = [
@@ -115,6 +135,8 @@ const projects: Project[] = [
       "Бенчмарки: GSM8K, MMLU, ARC",
     ],
     architecture: "ReasoningInterceptor → AGENT_MAP → BaseAgent.stream() → OllamaClient",
+    githubPath: "apps/agent-reasoning",
+    liveUrl: "/?XTransformPort=3001",
   },
   {
     id: "picooraclaw",
@@ -144,6 +166,7 @@ const projects: Project[] = [
       "Постоянная память агента",
     ],
     architecture: "Config → Provider (Ollama/OCI) → Storage (Oracle/File) → Channels",
+    githubPath: "apps/picooraclaw",
   },
   {
     id: "agentic-rag",
@@ -173,6 +196,7 @@ const projects: Project[] = [
       "Гибридный поиск (вектор + ключевое слово)",
     ],
     architecture: "Document Loader → Embeddings (Oracle/ChromaDB) → Retriever → CoT Agents → UI",
+    githubPath: "apps/agentic_rag",
   },
   {
     id: "finance-ai-agent",
@@ -202,6 +226,7 @@ const projects: Project[] = [
       "Tavily web search fallback",
     ],
     architecture: "React UI → FastAPI → Oracle AI DB (vector + graph + spatial + JSON) + OpenAI",
+    githubPath: "apps/finance-ai-agent-demo",
   },
   {
     id: "fittracker",
@@ -231,6 +256,7 @@ const projects: Project[] = [
       "Геймированная механика",
     ],
     architecture: "FastAPI → Oracle 26ai (JSON Duality) + Redis Cache",
+    githubPath: "apps/FitTracker",
   },
   {
     id: "oci-genai-jet",
@@ -260,6 +286,7 @@ const projects: Project[] = [
       "Autonomous DB wallet",
     ],
     architecture: "Oracle JET → Spring Boot → OCI GenAI + Oracle ADB",
+    githubPath: "apps/oci-generative-ai-jet-ui",
   },
   {
     id: "tanstack-shoe-store",
@@ -289,6 +316,7 @@ const projects: Project[] = [
       "Vite dev server",
     ],
     architecture: "TanStack Start → Oracle Select AI → LLM (NL→SQL) → Autonomous DB",
+    githubPath: "apps/tanstack-shoe-store",
   },
   {
     id: "oracle-data-migration",
@@ -318,6 +346,7 @@ const projects: Project[] = [
       "OCI GenAI (Grok 3 Fast)",
     ],
     architecture: "MongoDB → Migration Agent → Oracle AI DB (vector + JSON Duality)",
+    githubPath: "apps/oracle-data-migration-harness",
   },
   {
     id: "oracle-rag",
@@ -347,6 +376,7 @@ const projects: Project[] = [
       "Zero cloud API spend",
     ],
     architecture: "Streamlit UI → LangChain → Oracle AI DB (embeddings + HNSW) + Ollama",
+    githubPath: "apps/oracle-rag",
   },
   {
     id: "supplychain-agent",
@@ -376,6 +406,7 @@ const projects: Project[] = [
       "FastAPI + React UI",
     ],
     architecture: "React UI → FastAPI → LangGraph Supervisor → Specialists → Oracle AI DB",
+    githubPath: "apps/supplychain-demand-planning-agent",
   },
   {
     id: "oracle-java-memory",
@@ -405,6 +436,7 @@ const projects: Project[] = [
       "Ollama (локальный LLM)",
     ],
     architecture: "Streamlit UI → Spring Boot → Oracle AI DB (3 memory types) + Ollama",
+    githubPath: "apps/oracle-database-java-agent-memory",
   },
   {
     id: "rag-to-memory",
@@ -434,6 +466,7 @@ const projects: Project[] = [
       "Graceful degradation",
     ],
     architecture: "CLI → MemoryManager → 5 Memory Stores → Oracle AI DB (+ SimulatedModel fallback)",
+    githubPath: "apps/rag-to-memory-systems-demo",
   },
   {
     id: "oracle-vector-search",
@@ -463,6 +496,7 @@ const projects: Project[] = [
       "Spring Boot",
     ],
     architecture: "REST API → Spring Boot → Oracle DB (vectors) + OpenAI (embeddings)",
+    githubPath: "apps/oracle-database-vector-search",
   },
   {
     id: "limitless-workflow",
@@ -492,6 +526,7 @@ const projects: Project[] = [
       "CLI-ориентированный",
     ],
     architecture: "Claude Code → Oracle AI DB (OCI) → Obsidian Vault",
+    githubPath: "apps/limitless-workflow",
   },
   {
     id: "vecdb",
@@ -518,6 +553,7 @@ const projects: Project[] = [
       "Описание Oracle Vector DB",
     ],
     architecture: "N/A — маркетинговая страница",
+    githubPath: "apps/vecdb",
   },
 ];
 
@@ -528,6 +564,7 @@ const workshops = [
     description: "Постройте ассистента для научных статей по 200 ArXiv papers, реализуя 5 стратегий поиска (keyword, vector, hybrid, graph) и полный RAG-пайплайн.",
     stack: ["Oracle AI DB", "sentence-transformers", "OCI GenAI"],
     difficulty: "Начальный" as const,
+    githubPath: "workshops/information_retrieval_to_RAG",
   },
   {
     id: "rag-to-agents",
@@ -535,6 +572,7 @@ const workshops = [
     description: "Расширьте RAG-пайплайн до мульти-агентной системы — оберните retrieval как инструменты агента, добавьте оркестрацию и персистентную память на Oracle.",
     stack: ["Oracle AI DB", "OpenAI API", "openai-agents"],
     difficulty: "Средний" as const,
+    githubPath: "workshops/from_rag_to_agents_workshop",
   },
   {
     id: "agent-memory-ws",
@@ -542,6 +580,7 @@ const workshops = [
     description: "Постройте агентов с памятью: реализуйте MemoryManager с 6 типами памяти в Oracle, примените context-engineering техники.",
     stack: ["Oracle AI DB", "langchain-oracledb", "OCI GenAI", "Tavily"],
     difficulty: "Средний" as const,
+    githubPath: "workshops/agent_memory_workshop",
   },
   {
     id: "enterprise-harness",
@@ -549,6 +588,7 @@ const workshops = [
     description: "Постройте enterprise data agent на Oracle AI DB 26ai с OAMP, hybrid search, JSON Duality Views, Deep Data Security и DBMS_SCHEDULER. Живой Flask + React UI.",
     stack: ["Oracle AI DB 26ai", "OAMP", "Flask", "React"],
     difficulty: "Продвинутый" as const,
+    githubPath: "workshops/enterprise-data-agent-harness-workshop",
   },
   {
     id: "supplychain-ws",
@@ -556,6 +596,7 @@ const workshops = [
     description: "Мульти-агентный помощник с LangGraph supervisor, векторными знаниями, долгосрочной памятью и семантическим кэшем. FastAPI + React чат с анимированной топологией.",
     stack: ["Oracle AI DB", "LangGraph", "FastAPI", "React"],
     difficulty: "Продвинутый" as const,
+    githubPath: "workshops/supplychain_demand_agent_workshop",
   },
 ];
 
@@ -714,13 +755,30 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
         <DependencyRadar project={project} />
 
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button variant="ghost" className="w-full gap-2 text-xs group-hover:bg-background/50">
-              <Sparkles className="h-3 w-3" /> Подробнее
-              <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+        {/* Action buttons - real clickable links */}
+        <div className="flex flex-wrap gap-2 pt-1">
+          {project.liveUrl && (
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+              <Button size="sm" className="gap-1.5 text-xs">
+                <Globe className="h-3 w-3" /> Открыть Live
+              </Button>
+            </a>
+          )}
+          <a
+            href={`https://github.com/oracle-devrel/oracle-ai-developer-hub/tree/main/${project.githubPath}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+              <ExternalLink className="h-3 w-3" /> Исходный код
             </Button>
-          </DialogTrigger>
+          </a>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="ghost" size="sm" className="gap-1.5 text-xs">
+                <Sparkles className="h-3 w-3" /> Подробнее
+              </Button>
+            </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[85vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="flex items-center gap-3 text-xl">
@@ -766,9 +824,29 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                   </Badge>
                 ))}
               </div>
+              {/* Links in dialog */}
+              <div className="flex flex-wrap gap-2 pt-2 border-t border-border/50">
+                {project.liveUrl && (
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                    <Button size="sm" className="gap-1.5">
+                      <Globe className="h-3.5 w-3.5" /> Открыть Live демо
+                    </Button>
+                  </a>
+                )}
+                <a
+                  href={`https://github.com/oracle-devrel/oracle-ai-developer-hub/tree/main/${project.githubPath}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" size="sm" className="gap-1.5">
+                    <ExternalLink className="h-3.5 w-3.5" /> GitHub
+                  </Button>
+                </a>
+              </div>
             </div>
           </DialogContent>
         </Dialog>
+        </div>
       </CardContent>
     </Card>
   );
@@ -776,7 +854,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 function WorkshopCard({ workshop }: { workshop: (typeof workshops)[0] }) {
   return (
-    <Card className="border-border/50 hover:border-border transition-all duration-300">
+    <Card className="border-border/50 hover:border-border transition-all duration-300 hover:shadow-md">
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-2">
           <CardTitle className="text-base leading-tight flex items-center gap-2">
@@ -797,6 +875,16 @@ function WorkshopCard({ workshop }: { workshop: (typeof workshops)[0] }) {
             </Badge>
           ))}
         </div>
+        <a
+          href={`https://github.com/oracle-devrel/oracle-ai-developer-hub/tree/main/${workshop.githubPath}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block"
+        >
+          <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+            <ExternalLink className="h-3 w-3" /> Открыть на GitHub
+          </Button>
+        </a>
       </CardContent>
     </Card>
   );
@@ -939,7 +1027,7 @@ export default function DashboardPage() {
 
         {/* Tabs */}
         <Tabs value={tab} onValueChange={setTab} className="space-y-4">
-          <TabsList className="grid w-full grid-cols-3 max-w-md">
+          <TabsList className="grid w-full grid-cols-4 max-w-lg">
             <TabsTrigger value="apps" className="gap-1.5 text-xs sm:text-sm">
               <Cpu className="h-3.5 w-3.5" /> Приложения ({projects.filter((p) => p.category === "app").length})
             </TabsTrigger>
@@ -948,6 +1036,9 @@ export default function DashboardPage() {
             </TabsTrigger>
             <TabsTrigger value="notebooks" className="gap-1.5 text-xs sm:text-sm">
               <BookOpen className="h-3.5 w-3.5" /> Ноутбуки ({notebooks.length})
+            </TabsTrigger>
+            <TabsTrigger value="explorer" className="gap-1.5 text-xs sm:text-sm">
+              <Brain className="h-3.5 w-3.5" /> Explorer
             </TabsTrigger>
           </TabsList>
 
@@ -1026,6 +1117,111 @@ export default function DashboardPage() {
                 </div>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          {/* Explorer tab - Agent Reasoning Interactive */}
+          <TabsContent value="explorer" className="space-y-4">
+            <div className="explorer-panel">
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold tracking-tight mb-2">
+                  From <span className="text-s1">Next Token</span> to <span className="text-s2">Next Thought</span>
+                </h2>
+                <p className="text-sm" style={{ color: "var(--explorer-muted)" }}>
+                  15 интерактивных виджетов — исследуйте 16 стратегий рассуждений, которые превращают LLM в агентов-решателей.
+                  Нажимайте кнопки, двигайте слайдеры, изучайте когнитивные архитектуры.
+                </p>
+              </div>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s1">01</span> Chain-of-Thought</h2>
+                <p className="text-sm mb-2">Пошаговое рассуждение: вместо прямого ответа модель нумерует шаги (Step 1, Step 2...), что кардинально улучшает точность на математических и логических задачах.</p>
+                <CoTChainWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s2">02</span> Tree of Thoughts</h2>
+                <p className="text-sm mb-2">Расширение CoT до дерева: модель генерирует несколько кандидатов, оценивает каждый, отсекает слабые и продолжает только лучшие ветки.</p>
+                <ToTTreeWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s2">03</span> ReAct: Reason + Act</h2>
+                <p className="text-sm mb-2">Чередование внутреннего рассуждения (Thought) с вызовом инструментов (Action) и чтением результатов (Observation).</p>
+                <ReActWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s3">04</span> Self-Reflection</h2>
+                <p className="text-sm mb-2">Цикл Черновик → Критика → Улучшение. Модель оценивает свой ответ и дорабатывает его.</p>
+                <SelfReflectionWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s3">05</span> Self-Consistency</h2>
+                <p className="text-sm mb-2">Генерация k независимых рассуждений и мажоритарное голосование за лучший ответ.</p>
+                <ConsistencyWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s4">06</span> Decomposition</h2>
+                <p className="text-sm mb-2">Разбиение сложной задачи на подзадачи, последовательное решение и синтез.</p>
+                <DecomposedWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s4">07</span> Least-to-Most</h2>
+                <p className="text-sm mb-2">Упорядочение подзадач от простых к сложным — каждая решённая задача помогает следующей.</p>
+                <LeastToMostWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s5">08</span> Refinement Loop</h2>
+                <p className="text-sm mb-2">Цикл Генератор → Критик (оценка 0.0–1.0) → Улучшатель с количественным контролем качества.</p>
+                <RefinementWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s6">09</span> Adversarial Debate</h2>
+                <p className="text-sm mb-2">Две стороны (PRO и CON) спорят, судья оценивает каждый раунд.</p>
+                <DebateWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s6">10</span> MCTS</h2>
+                <p className="text-sm mb-2">Monte Carlo Tree Search с UCB1 — тот же алгоритм, что powered AlphaGo.</p>
+                <MCTSWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s6">11</span> Analogical Reasoning</h2>
+                <p className="text-sm mb-2">Решение через структурные аналогии из других предметных областей.</p>
+                <AnalogicalWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s6">12</span> Socratic Method</h2>
+                <p className="text-sm mb-2">Построение понимания через последовательные вопросы.</p>
+                <SocraticWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s7">13</span> Meta-Reasoning</h2>
+                <p className="text-sm mb-2">Автоматическая классификация запроса и маршрутизация к оптимальной стратегии.</p>
+                <MetaReasoningWidget />
+              </section>
+
+              <section className="mb-8">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s7">14</span> Benchmarks</h2>
+                <p className="text-sm mb-2">Сравнение стратегий по точности на GSM8K, MMLU и ARC-Challenge.</p>
+                <StrategyComparisonWidget />
+              </section>
+
+              <section className="mb-4">
+                <h2 className="text-lg font-bold mb-2"><span className="text-s7">15</span> Architecture</h2>
+                <p className="text-sm mb-2">Системная архитектура: ReasoningInterceptor → AGENT_MAP → BaseAgent.</p>
+                <ArchitectureWidget />
+              </section>
+            </div>
           </TabsContent>
         </Tabs>
       </main>
