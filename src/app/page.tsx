@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import {
@@ -1068,40 +1068,38 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
     <Card className={`group card-glow relative overflow-hidden border-border/50 hover:border-border transition-all duration-300 hover:shadow-lg animate-fade-in-up ${staggerClass}`}>
       <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-      <CardHeader className="relative pb-3">
-        <div className="flex items-start justify-between">
-          <div className="flex items-center gap-3">
-            <div className={`p-2 rounded-lg bg-muted ${project.color}`}>{project.icon}</div>
-            <div>
+      <CardHeader className="relative pb-2 sm:pb-3">
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className={`p-1.5 sm:p-2 rounded-lg bg-muted ${project.color} shrink-0`}>{project.icon}</div>
+            <div className="min-w-0">
               <Link href={`/project/${project.id}`} className="hover:underline">
-                <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors">{project.name}</CardTitle>
+                <CardTitle className="text-sm sm:text-lg leading-tight group-hover:text-primary transition-colors">{project.name}</CardTitle>
               </Link>
               <div className="mt-1">{runnabilityBadge(project.runnability)}</div>
             </div>
           </div>
           {project.hasWebUI && (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <Badge variant="outline" className="gap-1 text-xs">
-                    <Globe className="h-3 w-3" /> Web UI
-                  </Badge>
-                </TooltipTrigger>
-                <TooltipContent>Есть веб-интерфейс</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <Badge variant="outline" className="gap-1 text-[10px] sm:text-xs shrink-0">
+              <Globe className="h-2.5 w-2.5 sm:h-3 sm:w-3" /> Web
+            </Badge>
           )}
         </div>
       </CardHeader>
-      <CardContent className="relative space-y-4">
-        <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
+      <CardContent className="relative space-y-3 sm:space-y-4">
+        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-none">{project.description}</p>
 
-        <div className="flex flex-wrap gap-1.5">
-          {project.stack.map((s) => (
-            <Badge key={s} variant="secondary" className="text-xs font-normal">
+        <div className="flex flex-wrap gap-1 sm:gap-1.5">
+          {project.stack.slice(0, 4).map((s) => (
+            <Badge key={s} variant="secondary" className="text-[10px] sm:text-xs font-normal">
               {s}
             </Badge>
           ))}
+          {project.stack.length > 4 && (
+            <Badge variant="secondary" className="text-[10px] sm:text-xs font-normal">
+              +{project.stack.length - 4}
+            </Badge>
+          )}
         </div>
 
         <DependencyRadar project={project} />
@@ -1216,32 +1214,32 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 function WorkshopCard({ workshop }: { workshop: (typeof workshops)[0] }) {
   return (
     <Card className="border-border/50 hover:border-border transition-all duration-300 hover:shadow-md">
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-2 sm:pb-3">
         <div className="flex items-start justify-between gap-2">
-          <CardTitle className="text-base leading-tight flex items-center gap-2">
-            <GraduationCap className="h-4 w-4 text-primary shrink-0" />
-            <Link href={`/project/${workshop.id}`} className="hover:underline hover:text-primary transition-colors">
+          <CardTitle className="text-sm sm:text-base leading-tight flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <GraduationCap className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary shrink-0" />
+            <Link href={`/project/${workshop.id}`} className="hover:underline hover:text-primary transition-colors truncate">
               {workshop.name}
             </Link>
           </CardTitle>
-          <Badge className={`${difficultyColor(workshop.difficulty)} shrink-0`}>
+          <Badge className={`${difficultyColor(workshop.difficulty)} shrink-0 text-[10px] sm:text-xs`}>
             {workshop.difficulty}
           </Badge>
         </div>
       </CardHeader>
-      <CardContent className="space-y-3">
-        <p className="text-sm text-muted-foreground leading-relaxed">{workshop.description}</p>
-        <div className="flex flex-wrap gap-1.5">
+      <CardContent className="space-y-2 sm:space-y-3">
+        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-none">{workshop.description}</p>
+        <div className="flex flex-wrap gap-1 sm:gap-1.5">
           {workshop.stack.map((s) => (
-            <Badge key={s} variant="secondary" className="text-xs font-normal">
+            <Badge key={s} variant="secondary" className="text-[10px] sm:text-xs font-normal">
               {s}
             </Badge>
           ))}
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
           <Link href={`/project/${workshop.id}`}>
-            <Button size="sm" className="gap-1.5 text-xs bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0">
-              <FileSearch className="h-3 w-3" /> Открыть проект
+            <Button size="sm" className="gap-1 text-[10px] sm:text-xs h-7 sm:h-8 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0">
+              <FileSearch className="h-3 w-3" /> Открыть
             </Button>
           </Link>
           <a
@@ -1249,7 +1247,7 @@ function WorkshopCard({ workshop }: { workshop: (typeof workshops)[0] }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+            <Button variant="outline" size="sm" className="gap-1 text-[10px] sm:text-xs h-7 sm:h-8">
               <ExternalLink className="h-3 w-3" /> GitHub
             </Button>
           </a>
@@ -1264,6 +1262,15 @@ function NotebookCard({ notebook }: { notebook: (typeof notebooks)[0] }) {
   const githubUrl = `${GITHUB_BASE}/${notebook.filePath}`;
 
   const categoryLabel: Record<string, string> = {
+    rag: "RAG",
+    agents: "Агенты",
+    database: "БД",
+    analytics: "Аналитика",
+    multimodal: "Мульти",
+    multicloud: "Мультиобл.",
+  };
+
+  const categoryLabelFull: Record<string, string> = {
     rag: "RAG",
     agents: "Агенты",
     database: "База данных",
@@ -1283,41 +1290,44 @@ function NotebookCard({ notebook }: { notebook: (typeof notebooks)[0] }) {
 
   return (
     <Card className="border-border/50 hover:border-border transition-all duration-300 hover:shadow-md group">
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-2 sm:pb-3">
         <div className="flex items-start justify-between gap-2">
-          <CardTitle className="text-base leading-tight flex items-center gap-2">
-            <BookOpen className="h-4 w-4 text-orange-500 shrink-0" />
+          <CardTitle className="text-sm sm:text-base leading-tight flex items-center gap-1.5 sm:gap-2 min-w-0">
+            <BookOpen className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-orange-500 shrink-0" />
             <a
               href={colabUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:underline hover:text-orange-500 transition-colors"
+              className="hover:underline hover:text-orange-500 transition-colors truncate"
             >
               {notebook.name}
             </a>
           </CardTitle>
-          <Badge className={`${categoryColor[notebook.category] || "bg-gray-500/15 text-gray-600 border-gray-500/25"} shrink-0`}>
+          <Badge className={`${categoryColor[notebook.category] || "bg-gray-500/15 text-gray-600 border-gray-500/25"} shrink-0 text-[10px] sm:text-xs hidden sm:inline-flex`}>
+            {categoryLabelFull[notebook.category] || notebook.category}
+          </Badge>
+          <Badge className={`${categoryColor[notebook.category] || "bg-gray-500/15 text-gray-600 border-gray-500/25"} shrink-0 text-[10px] sm:hidden`}>
             {categoryLabel[notebook.category] || notebook.category}
           </Badge>
         </div>
       </CardHeader>
-      <CardContent className="space-y-3">
-        <p className="text-sm text-muted-foreground leading-relaxed">{notebook.description}</p>
-        <div className="flex flex-wrap gap-1.5">
+      <CardContent className="space-y-2 sm:space-y-3">
+        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-none">{notebook.description}</p>
+        <div className="flex flex-wrap gap-1 sm:gap-1.5">
           {notebook.stack.map((s) => (
-            <Badge key={s} variant="secondary" className="text-xs font-normal">
+            <Badge key={s} variant="secondary" className="text-[10px] sm:text-xs font-normal">
               {s}
             </Badge>
           ))}
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5 sm:gap-2">
           <a href={colabUrl} target="_blank" rel="noopener noreferrer">
-            <Button size="sm" className="gap-1.5 text-xs bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0">
-              <Play className="h-3 w-3" /> Открыть в Colab
+            <Button size="sm" className="gap-1 text-[10px] sm:text-xs h-7 sm:h-8 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0">
+              <Play className="h-3 w-3" /> <span className="sm:hidden">Colab</span><span className="hidden sm:inline">Открыть в Colab</span>
             </Button>
           </a>
           <a href={githubUrl} target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+            <Button variant="outline" size="sm" className="gap-1 text-[10px] sm:text-xs h-7 sm:h-8">
               <ExternalLink className="h-3 w-3" /> GitHub
             </Button>
           </a>
@@ -1419,7 +1429,7 @@ export default function DashboardPage() {
   const [mounted, setMounted] = useState(false);
 
   // Avoid hydration mismatch
-  useMemo(() => { setMounted(true); }, []);
+  useEffect(() => { setMounted(true); }, []);
 
   const filteredApps = useMemo(() => {
     const apps = projects.filter((p) => p.category === "app");
@@ -1499,7 +1509,7 @@ export default function DashboardPage() {
         </div>
       </header>
 
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 space-y-6">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-3 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-6">
         {/* Stats */}
         <HeroStats />
 
@@ -1533,9 +1543,9 @@ export default function DashboardPage() {
           {/* Apps tab */}
           <TabsContent value="apps" className="space-y-4">
             {/* Filters */}
-            <div className="flex flex-wrap items-center gap-2">
-              <Filter className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">Фильтр:</span>
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <Filter className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" />
+              <span className="text-xs sm:text-sm text-muted-foreground">Фильтр:</span>
               {[
                 { key: "all" as const, label: "Все" },
                 { key: "fully_local" as const, label: "Локально" },
@@ -1546,7 +1556,7 @@ export default function DashboardPage() {
                   key={f.key}
                   variant={filter === f.key ? "default" : "outline"}
                   size="sm"
-                  className="text-xs"
+                  className="text-[10px] sm:text-xs h-6 sm:h-7 px-2 sm:px-3"
                   onClick={() => setFilter(f.key)}
                 >
                   {f.label}
@@ -1555,7 +1565,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
               {filteredApps.map((project, idx) => (
                 <ProjectCard key={project.id} project={project} index={idx} />
               ))}
@@ -1571,7 +1581,7 @@ export default function DashboardPage() {
 
           {/* Workshops tab */}
           <TabsContent value="workshops" className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {workshops.map((w) => (
                 <WorkshopCard key={w.id} workshop={w} />
               ))}
@@ -1581,26 +1591,27 @@ export default function DashboardPage() {
           {/* Notebooks tab */}
           <TabsContent value="notebooks" className="space-y-4">
             {/* Category filter */}
-            <div className="flex flex-wrap gap-2 items-center">
-              <span className="text-sm text-muted-foreground mr-1">Категория:</span>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 items-center">
+              <span className="text-xs sm:text-sm text-muted-foreground mr-0.5">Кат:</span>
               {[
-                { key: "all", label: "Все" },
-                { key: "rag", label: "RAG" },
-                { key: "agents", label: "Агенты" },
-                { key: "database", label: "БД" },
-                { key: "analytics", label: "Аналитика" },
-                { key: "multimodal", label: "Мультимодальный" },
-                { key: "multicloud", label: "Мультиоблако" },
+                { key: "all", label: "Все", labelShort: "Все" },
+                { key: "rag", label: "RAG", labelShort: "RAG" },
+                { key: "agents", label: "Агенты", labelShort: "Аг." },
+                { key: "database", label: "БД", labelShort: "БД" },
+                { key: "analytics", label: "Аналитика", labelShort: "Ан." },
+                { key: "multimodal", label: "Мультимодальный", labelShort: "Мульт." },
+                { key: "multicloud", label: "Мультиоблако", labelShort: "Обл." },
               ].map((cat) => (
                 <Button
                   key={cat.key}
                   variant={notebookFilter === cat.key ? "default" : "outline"}
                   size="sm"
-                  className="text-xs h-7"
+                  className="text-[10px] sm:text-xs h-6 sm:h-7 px-1.5 sm:px-3"
                   onClick={() => setNotebookFilter(cat.key)}
                 >
-                  {cat.label}
-                  <span className="ml-1 opacity-60">
+                  <span className="hidden sm:inline">{cat.label}</span>
+                  <span className="sm:hidden">{cat.labelShort}</span>
+                  <span className="ml-0.5 sm:ml-1 opacity-60">
                     {cat.key === "all"
                       ? notebooks.length
                       : notebooks.filter((n) => n.category === cat.key).length}
@@ -1608,10 +1619,10 @@ export default function DashboardPage() {
                 </Button>
               ))}
             </div>
-            <div className="text-sm text-muted-foreground mb-2">
-              Нажмите на название ноутбука или кнопку «Открыть в Colab», чтобы запустить его в Google Colab
+            <div className="text-xs sm:text-sm text-muted-foreground mb-2">
+              Нажмите на название ноутбука или кнопку «Colab», чтобы запустить его в Google Colab
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {notebooks
                 .filter((nb) => notebookFilter === "all" || nb.category === notebookFilter)
                 .map((nb) => (
