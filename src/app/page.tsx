@@ -120,7 +120,7 @@ interface Project {
 const projects: Project[] = [
   {
     id: "agent-reasoning",
-    name: "Agent Reasoning",
+    name: "Агентные рассуждения",
     category: "app",
     description:
       "16 когнитивных архитектур (CoT, ToT, ReAct, Self-Reflection и др.) превращают LLM в надёжных решателей задач.",
@@ -139,7 +139,7 @@ const projects: Project[] = [
     gradient: "from-orange-500/20 to-amber-500/10",
     features: [
       "16 стратегий рассуждений",
-      "Next.js Interactive Explorer",
+      "Интерактивный обозреватель Next.js",
       "Go TUI с Bubble Tea",
       "Python CLI с Rich",
       "Прокси-сервер (Ollama-совместимый)",
@@ -181,7 +181,7 @@ const projects: Project[] = [
   },
   {
     id: "agentic-rag",
-    name: "Agentic RAG",
+    name: "Агентный RAG",
     category: "app",
     description:
       "Интеллектуальная RAG-система с мульти-агентным CoT, обработкой PDF/Web/Repo и интеграцией Oracle AI DB.",
@@ -211,7 +211,7 @@ const projects: Project[] = [
   },
   {
     id: "finance-ai-agent",
-    name: "Finance AI Agent",
+    name: "Финансовый ИИ-агент",
     category: "app",
     description:
       "Финансовый AI-агент с Oracle AI DB как единым ядром памяти для векторных, графовых, пространственных и реляционных запросов.",
@@ -271,7 +271,7 @@ const projects: Project[] = [
   },
   {
     id: "oci-genai-jet",
-    name: "OCI Generative AI JET UI",
+    name: "OCI Генеративный ИИ JET UI",
     category: "app",
     description:
       "Full-stack AI приложение с Oracle JET UI, OCI Generative AI, Kubernetes и Terraform инфраструктурой.",
@@ -290,18 +290,18 @@ const projects: Project[] = [
     gradient: "from-red-500/20 to-rose-500/10",
     features: [
       "Oracle JET UI",
-      "Spring Boot backend",
+      "Бэкенд на Spring Boot",
       "OCI GenAI чат + суммаризация",
       "Kubernetes деплой",
       "Terraform IaC",
-      "Autonomous DB wallet",
+      "Wallet автономной БД",
     ],
     architecture: "Oracle JET → Spring Boot → OCI GenAI + Oracle ADB",
     githubPath: "apps/oci-generative-ai-jet-ui",
   },
   {
     id: "tanstack-shoe-store",
-    name: "TanStack Shoe Store",
+    name: "TanStack Обувной магазин",
     category: "app",
     description:
       "AI чат-приложение на TanStack Start для запросов к БД обувного магазина на естественном языке через Oracle 26ai Select AI.",
@@ -322,16 +322,16 @@ const projects: Project[] = [
       "TanStack Start (React)",
       "Select AI (NL→SQL)",
       "Естественный язык → SQL",
-      "Multiple LLM providers",
+      "Несколько LLM-провайдеров",
       "Oracle Autonomous DB",
-      "Vite dev server",
+      "Сервер разработки Vite",
     ],
     architecture: "TanStack Start → Oracle Select AI → LLM (NL→SQL) → Autonomous DB",
     githubPath: "apps/tanstack-shoe-store",
   },
   {
     id: "oracle-data-migration",
-    name: "Data Migration Harness",
+    name: "Инструмент миграции данных",
     category: "app",
     description:
       "AI-агент для миграции RAG-корпуса из MongoDB в Oracle AI Database 26ai с сохранением векторного поиска и SQL/JSON Duality запросов.",
@@ -384,14 +384,14 @@ const projects: Project[] = [
       "LangChain интеграция",
       "Streamlit чат UI",
       "Docker Compose запуск",
-      "Zero cloud API spend",
+      "Без расходов на облачные API",
     ],
     architecture: "Streamlit UI → LangChain → Oracle AI DB (embeddings + HNSW) + Ollama",
     githubPath: "apps/oracle-rag",
   },
   {
     id: "supplychain-agent",
-    name: "Supply Chain Agent",
+    name: "Агент цепочки поставок",
     category: "app",
     description:
       "Мульти-агентный помощник планирования спроса с LangGraph supervisor, векторной памятью и семантическим кэшем на Oracle AI DB.",
@@ -412,8 +412,8 @@ const projects: Project[] = [
       "LangGraph supervisor",
       "2 specialist агента",
       "Анимированная топология",
-      "Semantic LLM cache",
-      "Per-thread checkpoints",
+      "Семантический LLM-кэш",
+      "Чекпоинты на поток",
       "FastAPI + React UI",
     ],
     architecture: "React UI → FastAPI → LangGraph Supervisor → Specialists → Oracle AI DB",
@@ -421,7 +421,7 @@ const projects: Project[] = [
   },
   {
     id: "oracle-java-memory",
-    name: "Java Agent Memory",
+    name: "Память Java-агента",
     category: "app",
     description:
       "Spring AI агент с 3 слоями памяти (эпизодическая, семантическая, процедурная) на Oracle AI DB. Docker + Ollama, без облака.",
@@ -451,7 +451,7 @@ const projects: Project[] = [
   },
   {
     id: "rag-to-memory",
-    name: "RAG → Memory Systems",
+    name: "RAG → Системы памяти",
     category: "app",
     description:
       "Демо 5 типизированных хранилищ памяти (policy, preference, fact, episodic, trace) на Oracle AI DB с SimulatedModel fallback.",
@@ -472,16 +472,16 @@ const projects: Project[] = [
       "5 типов памяти",
       "Simulated LLM (без API ключа)",
       "RuleBasedExtractor",
-      "Typed memory stores",
+      "Типизированные хранилища памяти",
       "CLI интерфейс",
-      "Graceful degradation",
+      "Плавная деградация",
     ],
     architecture: "CLI → MemoryManager → 5 Memory Stores → Oracle AI DB (+ SimulatedModel fallback)",
     githubPath: "apps/rag-to-memory-systems-demo",
   },
   {
     id: "oracle-vector-search",
-    name: "Vector Search (Spring)",
+    name: "Векторный поиск (Spring)",
     category: "app",
     description:
       "Spring Boot + GraalVM семантический поиск по каталогу питомцев с Oracle DB и OpenAI эмбеддингами.",
@@ -500,9 +500,9 @@ const projects: Project[] = [
     gradient: "from-fuchsia-500/20 to-pink-500/10",
     features: [
       "GraalVM native image",
-      "Semantic search API",
-      "OpenAI embeddings",
-      "Oracle DB vector storage",
+      "API семантического поиска",
+      "Эмбеддинги OpenAI",
+      "Векторное хранилище Oracle DB",
       "REST API",
       "Spring Boot",
     ],
@@ -511,7 +511,7 @@ const projects: Project[] = [
   },
   {
     id: "limitless-workflow",
-    name: "Limitless Workflow",
+    name: "Безграничный рабочий процесс",
     category: "app",
     description:
       "Claude Code-first машина понимания с Oracle AI Database на OCI и Obsidian vault для визуализации.",
@@ -531,9 +531,9 @@ const projects: Project[] = [
     features: [
       "Claude Code интеграция",
       "Obsidian визуализация",
-      "OCI-deployed Oracle DB",
-      "Code understanding",
-      "Knowledge graph",
+      "Oracle DB на OCI",
+      "Понимание кода",
+      "Граф знаний",
       "CLI-ориентированный",
     ],
     architecture: "Claude Code → Oracle AI DB (OCI) → Obsidian Vault",
@@ -571,7 +571,7 @@ const projects: Project[] = [
 const workshops = [
   {
     id: "ir-to-rag",
-    name: "Information Retrieval to RAG",
+    name: "Поиск информации до RAG",
     description: "Постройте ассистента для научных статей по 200 ArXiv papers, реализуя 5 стратегий поиска (keyword, vector, hybrid, graph) и полный RAG-пайплайн.",
     stack: ["Oracle AI DB", "sentence-transformers", "OCI GenAI"],
     difficulty: "Начальный" as const,
@@ -579,7 +579,7 @@ const workshops = [
   },
   {
     id: "rag-to-agents",
-    name: "From RAG to Agents",
+    name: "От RAG к агентам",
     description: "Расширьте RAG-пайплайн до мульти-агентной системы — оберните retrieval как инструменты агента, добавьте оркестрацию и персистентную память на Oracle.",
     stack: ["Oracle AI DB", "OpenAI API", "openai-agents"],
     difficulty: "Средний" as const,
@@ -587,7 +587,7 @@ const workshops = [
   },
   {
     id: "agent-memory-ws",
-    name: "Agent Memory Workshop",
+    name: "Воркшоп по памяти агента",
     description: "Постройте агентов с памятью: реализуйте MemoryManager с 6 типами памяти в Oracle, примените context-engineering техники.",
     stack: ["Oracle AI DB", "langchain-oracledb", "OCI GenAI", "Tavily"],
     difficulty: "Средний" as const,
@@ -595,7 +595,7 @@ const workshops = [
   },
   {
     id: "enterprise-harness",
-    name: "Enterprise Data Agent Harness",
+    name: "Каркас корпоративного агента данных",
     description: "Постройте enterprise data agent на Oracle AI DB 26ai с OAMP, hybrid search, JSON Duality Views, Deep Data Security и DBMS_SCHEDULER. Живой Flask + React UI.",
     stack: ["Oracle AI DB 26ai", "OAMP", "Flask", "React"],
     difficulty: "Продвинутый" as const,
@@ -603,7 +603,7 @@ const workshops = [
   },
   {
     id: "supplychain-ws",
-    name: "Supply-Chain Demand Agent",
+    name: "Агент спроса в цепочке поставок",
     description: "Мульти-агентный помощник с LangGraph supervisor, векторными знаниями, долгосрочной памятью и семантическим кэшем. FastAPI + React чат с анимированной топологией.",
     stack: ["Oracle AI DB", "LangGraph", "FastAPI", "React"],
     difficulty: "Продвинутый" as const,
@@ -617,7 +617,7 @@ const GITHUB_BASE = "https://github.com/oracle-devrel/oracle-ai-developer-hub/tr
 const notebooks = [
   {
     id: "agentic-rag-langchain",
-    name: "Agentic RAG with LangChain",
+    name: "Агентный RAG с LangChain",
     description: "Демонстрация агентного RAG с LangChain и Oracle AI Database — векторный поиск, генерация ответов, интеграция с Ollama",
     stack: ["Oracle AI DB", "langchain-oracledb", "Ollama"],
     filePath: "notebooks/agentic_rag_langchain_oracledb_demo.ipynb",
@@ -625,7 +625,7 @@ const notebooks = [
   },
   {
     id: "fs-vs-db-memory",
-    name: "FS vs DB Agent Memory",
+    name: "Файловая система vs БД памяти агента",
     description: "Сравнение файловой системы и Oracle AI DB для хранения памяти агента — бенчмарки производительности и точности",
     stack: ["LangChain", "Oracle AI DB", "OpenAI"],
     filePath: "notebooks/fs_vs_dbs.ipynb",
@@ -633,7 +633,7 @@ const notebooks = [
   },
   {
     id: "memory-context-eng",
-    name: "Memory Context Engineering",
+    name: "Инженерия контекста памяти",
     description: "Инженерия контекста памяти для агентов — долгосрочная память, семантический кэш, интеграция с Tavily",
     stack: ["LangChain", "Oracle AI DB", "OpenAI", "Tavily"],
     filePath: "notebooks/memory_context_engineering_agents.ipynb",
@@ -649,7 +649,7 @@ const notebooks = [
   },
   {
     id: "rag-zero-to-hero",
-    name: "RAG Agents Zero to Hero",
+    name: "RAG-агенты с нуля до профи",
     description: "Полное руководство по RAG-агентам — от базового векторного поиска до мульти-агентных систем с OpenAI Agents SDK",
     stack: ["Oracle AI DB", "OpenAI", "OpenAI Agents SDK"],
     filePath: "notebooks/oracle_rag_agents_zero_to_hero.ipynb",
@@ -657,7 +657,7 @@ const notebooks = [
   },
   {
     id: "rag-with-evals",
-    name: "RAG with Evals",
+    name: "RAG с оценкой качества",
     description: "RAG-пайплайн с оценкой качества — BEIR бенчмарки, Galileo мониторинг, метрики релевантности",
     stack: ["Oracle AI DB", "OpenAI", "BEIR", "Galileo"],
     filePath: "notebooks/oracle_rag_with_evals.ipynb",
@@ -665,7 +665,7 @@ const notebooks = [
   },
   {
     id: "agent-reasoning-demo",
-    name: "Agent Reasoning Demo",
+    name: "Демо агентных рассуждений",
     description: "Демонстрация 11 когнитивных архитектур рассуждений — Chain-of-Thought, Tree of Thoughts, ReAct и другие",
     stack: ["Ollama", "11 cognitive architectures"],
     filePath: "notebooks/agent_reasoning_demo.ipynb",
@@ -673,7 +673,7 @@ const notebooks = [
   },
   {
     id: "hybrid-search-agentic-rag",
-    name: "Hybrid Search (Agentic RAG)",
+    name: "Гибридный поиск (агентный RAG)",
     description: "Гибридный поиск в агентном RAG — комбинация ключевого и векторного поиска с LangGraph оркестрацией",
     stack: ["Oracle AI DB", "langchain-oracledb", "LangGraph"],
     filePath: "notebooks/oracle_agentic_rag_hybrid_search.ipynb",
@@ -681,7 +681,7 @@ const notebooks = [
   },
   {
     id: "f1-miami-strategy",
-    name: "F1 Miami Strategy (Oracle 26ai)",
+    name: "Стратегия F1 Майами (Oracle 26ai)",
     description: "Анализ стратегии F1 Miami GP с Oracle 23ai — визуализация телеметрии, Select AI для запросов на естественном языке",
     stack: ["Oracle AI DB", "FastF1", "Plotly"],
     filePath: "notebooks/f1_miami_strategy_oracle_26ai.ipynb",
@@ -689,7 +689,7 @@ const notebooks = [
   },
   {
     id: "oamp-developer-guide",
-    name: "OAMP Developer Guide",
+    name: "Руководство разработчика OAMP",
     description: "Руководство разработчика Oracle AI Database Memory Protocol — интеграция с LiteLLM, паттерны использования",
     stack: ["OAMP", "LiteLLM"],
     filePath: "notebooks/agent_memory/oracle_agent_memory_developer_guide.ipynb",
@@ -697,7 +697,7 @@ const notebooks = [
   },
   {
     id: "deep-research-agent",
-    name: "Deep Research Agent",
+    name: "Агент глубокого исследования",
     description: "Глубокий исследовательский агент — OpenAI Agents SDK для автоматического поиска, анализа и синтеза информации",
     stack: ["OpenAI Agents SDK", "Tavily", "OAMP"],
     filePath: "notebooks/agent_memory/01_deep_research_openai_agents.ipynb",
@@ -705,7 +705,7 @@ const notebooks = [
   },
   {
     id: "supply-chain-claude",
-    name: "Supply Chain (Claude SDK)",
+    name: "Цепочка поставок (Claude SDK)",
     description: "Мульти-агентная система управления цепочками поставок — Claude Agent SDK с MCP инструментами и Oracle AI Memory",
     stack: ["Claude Agent SDK", "MCP", "OAMP"],
     filePath: "notebooks/agent_memory/02_supply_chain_claude_agent_sdk.ipynb",
@@ -713,7 +713,7 @@ const notebooks = [
   },
   {
     id: "mortgage-workflow-langgraph",
-    name: "Mortgage Workflow (LangGraph)",
+    name: "Ипотечный процесс (LangGraph)",
     description: "Автоматизация ипотечного процесса с LangGraph — графовый воркфлоу с состоянием, оркестрация шагов одобрения",
     stack: ["LangGraph", "OAMP"],
     filePath: "notebooks/agent_memory/03_mortgage_workflow_langgraph.ipynb",
@@ -721,7 +721,7 @@ const notebooks = [
   },
   {
     id: "agent-loop-foundations",
-    name: "Agent Loop Foundations",
+    name: "Основы агентного цикла",
     description: "Основы агентного цикла — пошаговое построение агента от простого чата до автономного цикла рассуждение-действие",
     stack: ["Oracle AI DB", "LangChain"],
     filePath: "notebooks/agent_loop_foundations.ipynb",
@@ -729,7 +729,7 @@ const notebooks = [
   },
   {
     id: "agent-with-memory",
-    name: "Agent with Memory",
+    name: "Агент с памятью",
     description: "Агент с памятью — добавление краткосрочной и долгосрочной памяти к агенту, семантический поиск по истории",
     stack: ["Oracle AI DB", "LangChain"],
     filePath: "notebooks/agent_with_memory.ipynb",
@@ -737,7 +737,7 @@ const notebooks = [
   },
   {
     id: "unified-agent-memory",
-    name: "Unified Agent Memory",
+    name: "Единая память агента",
     description: "Единая система памяти агента — Oracle AI Database для хранения контекста, эпизодической и процедурной памяти",
     stack: ["Oracle AI DB", "LangChain"],
     filePath: "notebooks/unified_agent_memory_oracle_ai_database.ipynb",
@@ -745,7 +745,7 @@ const notebooks = [
   },
   {
     id: "oracle-agent-memory-long",
-    name: "Agent Memory Long Conversations",
+    name: "Длинные диалоги с памятью агента",
     description: "Обработка длинных диалогов в памяти агента — суммаризация, скользящее окно, семантическое сжатие",
     stack: ["Oracle AI DB", "LangChain"],
     filePath: "notebooks/oracle_agent_memory_long_conversations.ipynb",
@@ -761,7 +761,7 @@ const notebooks = [
   },
   {
     id: "oracle-26ai-unique-features",
-    name: "Oracle 23ai Unique Features",
+    name: "Уникальные возможности Oracle 23ai",
     description: "Уникальные возможности Oracle 23ai — AI Vector Search, Select AI, JSON-реляционная двойственность",
     stack: ["Oracle 23ai", "AI Vector Search"],
     filePath: "notebooks/oracle_26ai_unique_features_demo.ipynb",
@@ -777,7 +777,7 @@ const notebooks = [
   },
   {
     id: "onnx-embeddings",
-    name: "ONNX Embeddings Oracle AI DB",
+    name: "Эмбеддинги ONNX в Oracle AI DB",
     description: "Оптимизированные ONNX эмбеддинги в Oracle AI Database — ускорение векторного поиска с помощью ONNX Runtime",
     stack: ["Oracle AI DB", "ONNX", "HuggingFace"],
     filePath: "notebooks/onnx_embeddings_oracle_ai_database.ipynb",
@@ -785,7 +785,7 @@ const notebooks = [
   },
   {
     id: "enterprise-data-agent",
-    name: "Enterprise Data Agent",
+    name: "Корпоративный агент данных",
     description: "Корпоративный агент данных — доступ к бизнес-данным через естественный язык, SQL генерация, векторный поиск",
     stack: ["Oracle AI DB", "LangChain"],
     filePath: "notebooks/enterprise_data_agent.ipynb",
@@ -793,7 +793,7 @@ const notebooks = [
   },
   {
     id: "image-similarity-openclip",
-    name: "Image Similarity (OpenCLIP)",
+    name: "Поиск похожих изображений (OpenCLIP)",
     description: "Поиск похожих изображений с OpenCLIP и Oracle AI Database — мультимодальные эмбеддинги, визуальный поиск",
     stack: ["Oracle AI DB", "OpenCLIP", "PIL"],
     filePath: "notebooks/oracle_image_similarity_openclip.ipynb",
@@ -801,7 +801,7 @@ const notebooks = [
   },
   {
     id: "pipeline-failure-intelligence",
-    name: "Pipeline Failure Intelligence",
+    name: "Интеллектуальный анализ отказов конвейера",
     description: "Интеллектуальный анализ отказов конвейера — предиктивное обслуживание с ML и Oracle AI Database",
     stack: ["Oracle AI DB", "scikit-learn", "Plotly"],
     filePath: "notebooks/pipeline_failure_intelligence.ipynb",
@@ -809,7 +809,7 @@ const notebooks = [
   },
   {
     id: "multitenant-schema-walkthrough",
-    name: "Multitenant Schema Walkthrough",
+    name: "Обзор мультитенантной схемы",
     description: "Пошаговое руководство по мультитенантной архитектуре Oracle — изоляция данных, общие схемы, CDB/PDB",
     stack: ["Oracle Database", "Multitenant"],
     filePath: "notebooks/multitenant_schema_walkthrough.ipynb",
@@ -817,7 +817,7 @@ const notebooks = [
   },
   {
     id: "oracle-data-migration-harness",
-    name: "Data Migration Harness Walkthrough",
+    name: "Обзор инструмента миграции данных",
     description: "Руководство по Data Migration Harness — миграция данных с AI-помощником, автоматическое преобразование схем",
     stack: ["Oracle AI DB", "Migration"],
     filePath: "notebooks/oracle_data_migration_harness_walkthrough.ipynb",
@@ -825,7 +825,7 @@ const notebooks = [
   },
   {
     id: "agent-memory-benchmarks",
-    name: "Agent Memory Benchmarks",
+    name: "Бенчмарки памяти агента",
     description: "Бенчмарки памяти агента — сравнение производительности различных стратегий хранения контекста",
     stack: ["Oracle AI DB", "LangChain", "Benchmarks"],
     filePath: "notebooks/agent_memory/oracle_agent_memory_benchmarks.ipynb",
@@ -833,7 +833,7 @@ const notebooks = [
   },
   {
     id: "deep-research-oci-agents",
-    name: "Deep Research (OCI Agents)",
+    name: "Глубокое исследование (OCI Agents)",
     description: "Вариант Deep Research агента на OCI Agents SDK — облачная инфраструктура Oracle для автономного исследования",
     stack: ["OCI Agents SDK", "Tavily", "OAMP"],
     filePath: "notebooks/agent_memory/01_deep_research_oci_agents.ipynb",
@@ -841,7 +841,7 @@ const notebooks = [
   },
   {
     id: "supply-chain-oci-sdk",
-    name: "Supply Chain (OCI SDK)",
+    name: "Цепочка поставок (OCI SDK)",
     description: "Supply Chain агент на OCI SDK — нативная интеграция с облачными сервисами Oracle",
     stack: ["OCI SDK", "OAMP"],
     filePath: "notebooks/agent_memory/02_supply_chain_oci_sdk.ipynb",
@@ -849,7 +849,7 @@ const notebooks = [
   },
   {
     id: "mortgage-workflow-oci",
-    name: "Mortgage Workflow (OCI)",    
+    name: "Ипотечный процесс (OCI)",    
     description: "Ипотечный воркфлоу на OCI — облачная версия с LangGraph и Oracle Cloud Infrastructure",
     stack: ["LangGraph", "OCI", "OAMP"],
     filePath: "notebooks/agent_memory/03_mortgage_workflow_langgraph_oci.ipynb",
@@ -857,7 +857,7 @@ const notebooks = [
   },
   {
     id: "agent-memory-benchmarks-oci",
-    name: "Agent Memory Benchmarks (OCI)",
+    name: "Бенчмарки памяти агента (OCI)",
     description: "Бенчмарки памяти агента на OCI — облачное сравнение стратегий хранения",
     stack: ["OCI", "Oracle AI DB", "Benchmarks"],
     filePath: "notebooks/agent_memory/oracle_agent_memory_benchmarks_oci.ipynb",
@@ -865,7 +865,7 @@ const notebooks = [
   },
   {
     id: "oamp-developer-guide-oci",
-    name: "OAMP Developer Guide (OCI)",
+    name: "Руководство разработчика OAMP (OCI)",
     description: "Руководство разработчика OAMP для OCI — облачная версия с интеграцией OCI GenAI",
     stack: ["OAMP", "OCI GenAI"],
     filePath: "notebooks/agent_memory/oracle_agent_memory_developer_guide_oci.ipynb",
@@ -873,7 +873,7 @@ const notebooks = [
   },
   {
     id: "enterprise-agent-heavyweight",
-    name: "Enterprise Data Agent (Heavyweight)",
+    name: "Корпоративный агент данных (расширенный)",
     description: "Расширенная версия корпоративного агента — полный набор инструментов, чат-интерфейс, векторный поиск",
     stack: ["Oracle AI DB", "LangChain", "FastAPI"],
     filePath: "notebooks/agent_harness/enterprise_data_agent_heavyweight.ipynb",
@@ -881,7 +881,7 @@ const notebooks = [
   },
   {
     id: "colab-agent-memory",
-    name: "Agent Memory (Colab)",
+    name: "Память агента (Colab)",
     description: "Запуск агента с памятью в Google Colab — настройка среды, подключение к Oracle Cloud",
     stack: ["Oracle AI DB", "Colab", "LangChain"],
     filePath: "notebooks/multicloud/oracle_agent_memory_colab.ipynb",
@@ -889,7 +889,7 @@ const notebooks = [
   },
   {
     id: "colab-similarity-search",
-    name: "Similarity Search (Colab)",
+    name: "Поиск по сходству (Colab)",
     description: "Семантический поиск в Google Colab — векторные эмбеддинги и поиск похожих документов",
     stack: ["Oracle AI DB", "Colab", "Embeddings"],
     filePath: "notebooks/multicloud/similaritysearch-colab.ipynb",
@@ -897,7 +897,7 @@ const notebooks = [
   },
   {
     id: "colab-aws-agent-memory",
-    name: "Agent Memory AWS (Colab)",
+    name: "Память агента AWS (Colab)",
     description: "Мультиоблачный агент с памятью — Oracle AI DB + AWS Bedrock в Google Colab",
     stack: ["Oracle AI DB", "AWS Bedrock", "Colab"],
     filePath: "notebooks/multicloud/oracle_agent_memory_aws_colab.ipynb",
@@ -905,7 +905,7 @@ const notebooks = [
   },
   {
     id: "colab-rag-agent-devkit",
-    name: "RAG Chatbot with Agent DevKit (Colab)",
+    name: "RAG-чатбот с Agent DevKit (Colab)",
     description: "RAG-чатбот с Agent Development Kit в Colab — интерактивный поиск по документам",
     stack: ["Oracle AI DB", "Agent DevKit", "Colab"],
     filePath: "notebooks/multicloud/RAGChatbotwithAgentDevelopmentKit.ipynb",
@@ -913,7 +913,7 @@ const notebooks = [
   },
   {
     id: "colab-google-agent-memory",
-    name: "Agent Memory on Google Cloud (Colab)",
+    name: "Память агента в Google Cloud (Colab)",
     description: "Создание памяти агента в Google Cloud — Oracle AI DB + GCP Vertex AI интеграция",
     stack: ["Oracle AI DB", "Google Cloud", "Colab"],
     filePath: "notebooks/multicloud/create_ai_agent_memory_google.ipynb",
@@ -921,7 +921,7 @@ const notebooks = [
   },
   {
     id: "aws-similarity-search",
-    name: "AWS Similarity Search",
+    name: "Поиск по сходству AWS",
     description: "Векторный поиск Oracle + AWS — мультитенантная архитектура с Bedrock эмбеддингами",
     stack: ["Oracle AI DB", "AWS Bedrock", "LangChain"],
     filePath: "notebooks/multicloud/oracle-aws-similarity-search.ipynb",
@@ -929,7 +929,7 @@ const notebooks = [
   },
   {
     id: "azure-similarity-search",
-    name: "Azure Similarity Search",
+    name: "Поиск по сходству Azure",
     description: "Векторный поиск Oracle + Azure — интеграция с Azure OpenAI для эмбеддингов",
     stack: ["Oracle AI DB", "Azure OpenAI", "LangChain"],
     filePath: "notebooks/multicloud/oracle-azure-similarity-search.ipynb",
@@ -945,7 +945,7 @@ const notebooks = [
   },
   {
     id: "colab-unesco-selectai",
-    name: "UNESCO Sites SelectAI (Colab)",
+    name: "Объекты UNESCO через SelectAI (Colab)",
     description: "Анализ объектов UNESCO через SelectAI — запросы на естественном языке к данным в Oracle",
     stack: ["Oracle 23ai", "Select AI", "Colab"],
     filePath: "notebooks/multicloud/unesco-sites-selectai-colab.ipynb",
@@ -953,7 +953,7 @@ const notebooks = [
   },
   {
     id: "fs-vs-dbs-oci-genai",
-    name: "FS vs DB Memory (OCI GenAI)",
+    name: "Файловая vs БД память (OCI GenAI)",
     description: "Сравнение файловой и БД памяти агента с OCI GenAI — облачный вариант бенчмарков",
     stack: ["Oracle AI DB", "OCI GenAI", "LangChain"],
     filePath: "notebooks/fs_vs_dbs_oci_genai.ipynb",
@@ -961,7 +961,7 @@ const notebooks = [
   },
   {
     id: "mongodb-customers",
-    name: "MongoDB Customer Integration",
+    name: "Интеграция клиентов MongoDB",
     description: "Интеграция MongoDB с Oracle AI Database — синхронизация данных, кросс-БД запросы",
     stack: ["MongoDB", "Oracle AI DB", "Python"],
     filePath: "notebooks/multicloud/mongodb_create_customers.ipynb",

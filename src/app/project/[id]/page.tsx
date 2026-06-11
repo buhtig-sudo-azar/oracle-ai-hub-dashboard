@@ -59,12 +59,12 @@ interface ProjectMeta {
 
 const projectMeta: Record<string, ProjectMeta> = {
   "agent-reasoning": {
-    name: "Agent Reasoning",
+    name: "Агентные рассуждения",
     description: "16 когнитивных архитектур (CoT, ToT, ReAct, Self-Reflection и др.) превращают LLM в надёжных решателей задач.",
     longDescription: "Agent Reasoning — это «мыслительный слой» AI-стека. Вместо того чтобы просить модель сразу выдать ответ, система оборачивает LLM в когнитивные архитектуры: Chain-of-Thought, Tree of Thoughts, ReAct, Self-Reflection, Self-Consistency, Decomposition, MCTS, Socratic, Debate и другие.",
     stack: ["Python", "Ollama", "FastAPI", "Next.js", "Go", "Rich"],
     runnability: "fully_local", hasWebUI: true, requiresOracleDB: false, requiresOCI: false, requiresLLMAPI: false, requiresOllama: true, localLLM: true,
-    features: ["16 стратегий рассуждений", "Next.js Interactive Explorer", "Go TUI с Bubble Tea", "Python CLI с Rich", "Прокси-сервер (Ollama-совместимый)", "Бенчмарки: GSM8K, MMLU, ARC"],
+    features: ["16 стратегий рассуждений", "Интерактивный обозреватель Next.js", "Go TUI с Bubble Tea", "Python CLI с Rich", "Прокси-сервер (Ollama-совместимый)", "Бенчмарки: GSM8K, MMLU, ARC"],
     architecture: "ReasoningInterceptor → AGENT_MAP → BaseAgent.stream() → OllamaClient",
   },
   picooraclaw: {
@@ -77,7 +77,7 @@ const projectMeta: Record<string, ProjectMeta> = {
     architecture: "Config → Provider (Ollama/OCI) → Storage (Oracle/File) → Channels",
   },
   "agentic-rag": {
-    name: "Agentic RAG",
+    name: "Агентный RAG",
     description: "Интеллектуальная RAG-система с мульти-агентным CoT, обработкой PDF/Web/Repo и интеграцией Oracle AI DB.",
     longDescription: "Agentic RAG объединяет retrieval-augmented generation с мульти-агентной архитектурой Chain-of-Thought. Система обрабатывает PDF-документы, веб-страницы и репозитории кода.",
     stack: ["Python", "Oracle AI DB", "ChromaDB", "Ollama", "Gradio", "FastAPI"],
@@ -86,7 +86,7 @@ const projectMeta: Record<string, ProjectMeta> = {
     architecture: "Document Loader → Embeddings (Oracle/ChromaDB) → Retriever → CoT Agents → UI",
   },
   "finance-ai-agent": {
-    name: "Finance AI Agent",
+    name: "Финансовый ИИ-агент",
     description: "Финансовый AI-агент с Oracle AI DB как единым ядром памяти для векторных, графовых, пространственных и реляционных запросов.",
     longDescription: "Полноценный финансовый AI-агент, демонстрирующий Oracle AI Database как унифицированное ядро памяти. Выполняет векторный поиск, графовые запросы, пространственные запросы, JSON-запросы и гибридный поиск.",
     stack: ["Python", "Oracle AI DB", "OpenAI", "React", "Tailwind"],
@@ -104,25 +104,25 @@ const projectMeta: Record<string, ProjectMeta> = {
     architecture: "FastAPI → Oracle 26ai (JSON Duality) + Redis Cache",
   },
   "oci-genai-jet": {
-    name: "OCI Generative AI JET UI",
+    name: "OCI Генеративный ИИ JET UI",
     description: "Full-stack AI приложение с Oracle JET UI, OCI Generative AI, Kubernetes и Terraform инфраструктурой.",
     longDescription: "Полноценное enterprise-приложение с Oracle JET фронтендом, Spring Boot бэкендом и OCI Generative AI для чата и суммаризации.",
     stack: ["Oracle JET", "Spring Boot", "OCI GenAI", "Kubernetes", "Terraform"],
     runnability: "cloud_required", hasWebUI: true, requiresOracleDB: true, requiresOCI: true, requiresLLMAPI: false, requiresOllama: false, localLLM: false,
-    features: ["Oracle JET UI", "Spring Boot backend", "OCI GenAI чат + суммаризация", "Kubernetes деплой", "Terraform IaC", "Autonomous DB wallet"],
+    features: ["Oracle JET UI", "Бэкенд на Spring Boot", "OCI GenAI чат + суммаризация", "Kubernetes деплой", "Terraform IaC", "Wallet автономной БД"],
     architecture: "Oracle JET → Spring Boot → OCI GenAI + Oracle ADB",
   },
   "tanstack-shoe-store": {
-    name: "TanStack Shoe Store",
+    name: "TanStack Обувной магазин",
     description: "AI чат-приложение на TanStack Start для запросов к БД обувного магазина на естественном языке через Oracle 26ai Select AI.",
     longDescription: "Элегантное приложение на TanStack Start, позволяющее общаться с базой данных обувного магазина на естественном языке.",
     stack: ["TanStack Start", "Oracle 26ai Select AI", "Anthropic/OpenAI", "React"],
     runnability: "cloud_required", hasWebUI: true, requiresOracleDB: true, requiresOCI: true, requiresLLMAPI: true, requiresOllama: false, localLLM: false,
-    features: ["TanStack Start (React)", "Select AI (NL→SQL)", "Естественный язык → SQL", "Multiple LLM providers", "Oracle Autonomous DB", "Vite dev server"],
+    features: ["TanStack Start (React)", "Select AI (NL→SQL)", "Естественный язык → SQL", "Несколько LLM-провайдеров", "Oracle Autonomous DB", "Сервер разработки Vite"],
     architecture: "TanStack Start → Oracle Select AI → LLM (NL→SQL) → Autonomous DB",
   },
   "oracle-data-migration": {
-    name: "Data Migration Harness",
+    name: "Инструмент миграции данных",
     description: "AI-агент для миграции RAG-корпуса из MongoDB в Oracle AI Database 26ai с сохранением векторного поиска и SQL/JSON Duality запросов.",
     longDescription: "Инструмент миграции, который переносит RAG-корпус из MongoDB в Oracle AI Database 26ai, сохраняя векторный поиск и разблокируя SQL/JSON Duality запросы.",
     stack: ["Python", "Oracle AI DB", "MongoDB", "OCI GenAI", "React"],
@@ -136,20 +136,20 @@ const projectMeta: Record<string, ProjectMeta> = {
     longDescription: "Классический RAG-пайплайн на Oracle AI Database 26ai с in-database эмбеддингами и HNSW векторным индексом.",
     stack: ["Python", "Oracle AI DB", "Ollama", "LangChain", "Streamlit"],
     runnability: "partial_local", hasWebUI: true, requiresOracleDB: true, requiresOCI: false, requiresLLMAPI: false, requiresOllama: true, localLLM: true,
-    features: ["In-DB эмбеддинги", "HNSW векторный индекс", "LangChain интеграция", "Streamlit чат UI", "Docker Compose запуск", "Zero cloud API spend"],
+    features: ["In-DB эмбеддинги", "HNSW векторный индекс", "LangChain интеграция", "Streamlit чат UI", "Docker Compose запуск", "Без расходов на облачные API"],
     architecture: "Streamlit UI → LangChain → Oracle AI DB (embeddings + HNSW) + Ollama",
   },
   "supplychain-agent": {
-    name: "Supply Chain Agent",
+    name: "Агент цепочки поставок",
     description: "Мульти-агентный помощник планирования спроса с LangGraph supervisor, векторной памятью и семантическим кэшем на Oracle AI DB.",
     longDescription: "Мульти-агентная система планирования спроса с LangGraph supervisor над двумя специалистами. Векторные знания, долгосрочная память, чекпоинты и семантический кэш — всё в Oracle AI Database.",
     stack: ["Python", "Oracle AI DB", "LangGraph", "FastAPI", "React", "OCI GenAI"],
     runnability: "cloud_required", hasWebUI: true, requiresOracleDB: true, requiresOCI: false, requiresLLMAPI: true, requiresOllama: false, localLLM: false,
-    features: ["LangGraph supervisor", "2 specialist агента", "Анимированная топология", "Semantic LLM cache", "Per-thread checkpoints", "FastAPI + React UI"],
+    features: ["LangGraph supervisor", "2 specialist агента", "Анимированная топология", "Семантический LLM-кэш", "Чекпоинты на поток", "FastAPI + React UI"],
     architecture: "React UI → FastAPI → LangGraph Supervisor → Specialists → Oracle AI DB",
   },
   "oracle-java-memory": {
-    name: "Java Agent Memory",
+    name: "Память Java-агента",
     description: "Spring AI агент с 3 слоями памяти (эпизодическая, семантическая, процедурная) на Oracle AI DB.",
     longDescription: "Spring AI агент с тремя типами персистентной памяти: эпизодическая, семантическая и процедурная. Oracle AI Database выступает как единое хранилище для всех типов памяти.",
     stack: ["Java", "Spring AI", "Oracle AI DB", "Ollama", "Streamlit", "Docker"],
@@ -158,30 +158,30 @@ const projectMeta: Record<string, ProjectMeta> = {
     architecture: "Streamlit UI → Spring Boot → Oracle AI DB (3 memory types) + Ollama",
   },
   "rag-to-memory": {
-    name: "RAG → Memory Systems",
+    name: "RAG → Системы памяти",
     description: "Демо 5 типизированных хранилищ памяти (policy, preference, fact, episodic, trace) на Oracle AI DB с SimulatedModel fallback.",
     longDescription: "5 типов хранилищ памяти для AI-агентов: policy, preference, fact, episodic, trace. Уникальная особенность — флаг --simulated, который заменяет OpenAI на RuleBasedExtractor.",
     stack: ["Python", "Oracle AI DB", "OpenAI", "Simulated LLM"],
     runnability: "partial_local", hasWebUI: false, requiresOracleDB: true, requiresOCI: false, requiresLLMAPI: false, requiresOllama: false, localLLM: false,
-    features: ["5 типов памяти", "Simulated LLM (без API ключа)", "RuleBasedExtractor", "Typed memory stores", "CLI интерфейс", "Graceful degradation"],
+    features: ["5 типов памяти", "Simulated LLM (без API ключа)", "RuleBasedExtractor", "Типизированные хранилища памяти", "CLI интерфейс", "Плавная деградация"],
     architecture: "CLI → MemoryManager → 5 Memory Stores → Oracle AI DB (+ SimulatedModel fallback)",
   },
   "oracle-vector-search": {
-    name: "Vector Search (Spring)",
+    name: "Векторный поиск (Spring)",
     description: "Spring Boot + GraalVM семантический поиск по каталогу питомцев с Oracle DB и OpenAI эмбеддингами.",
     longDescription: "Демонстрация семантического поиска на Spring Boot с GraalVM native image. Поиск по каталогу питомцев с использованием Oracle DB для векторного хранения.",
     stack: ["Java", "Spring Boot", "GraalVM", "Oracle DB", "OpenAI"],
     runnability: "cloud_required", hasWebUI: false, requiresOracleDB: true, requiresOCI: false, requiresLLMAPI: true, requiresOllama: false, localLLM: false,
-    features: ["GraalVM native image", "Semantic search API", "OpenAI embeddings", "Oracle DB vector storage", "REST API", "Spring Boot"],
+    features: ["GraalVM native image", "API семантического поиска", "Эмбеддинги OpenAI", "Векторное хранилище Oracle DB", "REST API", "Spring Boot"],
     architecture: "REST API → Spring Boot → Oracle DB (vectors) + OpenAI (embeddings)",
   },
   "limitless-workflow": {
-    name: "Limitless Workflow",
+    name: "Безграничный рабочий процесс",
     description: "Claude Code-first машина понимания с Oracle AI Database на OCI и Obsidian vault для визуализации.",
     longDescription: "Инструмент для понимания кодовой базы, использующий Claude Code для анализа и Oracle AI Database на OCI для хранения знаний.",
     stack: ["Claude Code", "Oracle AI DB on OCI", "Obsidian"],
     runnability: "cloud_required", hasWebUI: false, requiresOracleDB: true, requiresOCI: true, requiresLLMAPI: false, requiresOllama: false, localLLM: false,
-    features: ["Claude Code интеграция", "Obsidian визуализация", "OCI-deployed Oracle DB", "Code understanding", "Knowledge graph", "CLI-ориентированный"],
+    features: ["Claude Code интеграция", "Obsidian визуализация", "Oracle DB на OCI", "Понимание кода", "Граф знаний", "CLI-ориентированный"],
     architecture: "Claude Code → Oracle AI DB (OCI) → Obsidian Vault",
   },
   vecdb: {
@@ -250,22 +250,35 @@ function getFileIcon(name: string, type: "file" | "directory") {
 
 function renderMarkdown(md: string): string {
   let html = md;
-  html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (_m, lang, code) =>
-    `<pre class="bg-muted rounded-lg p-4 overflow-x-auto text-sm my-3 border border-border/50"><code class="language-${lang || "text"}">${escapeHtml(code.trim())}</code></pre>`
-  );
-  html = html.replace(/`([^`]+)`/g, '<code class="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-orange-600 dark:text-orange-400">$1</code>');
-  html = html.replace(/^### (.+)$/gm, '<h3 class="text-lg font-semibold mt-6 mb-2 text-foreground">$1</h3>');
-  html = html.replace(/^## (.+)$/gm, '<h2 class="text-xl font-bold mt-8 mb-3 text-foreground border-b border-border/50 pb-2">$1</h2>');
+  // Remove shield.io badge images
+  html = html.replace(/<img[^>]*shields\.io[^>]*>/g, '');
+  // Fenced code blocks with language label
+  html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, (_m, lang, code) => {
+    const langLabel = lang ? `<div class="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-semibold px-4 pt-3 pb-1 border-b border-border/30 bg-muted/30 rounded-t-lg">${lang}</div>` : '';
+    const preClass = lang ? 'rounded-t-none' : 'rounded-lg';
+    return `<div class="my-4 rounded-lg border border-border/40 overflow-hidden shadow-sm">${langLabel}<pre class="bg-muted/50 ${preClass} p-4 overflow-x-auto text-sm leading-relaxed"><code class="language-${lang || "text"}">${escapeHtml(code.trim())}</code></pre></div>`;
+  });
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, '<code class="bg-primary/10 text-primary px-1.5 py-0.5 rounded-md text-[13px] font-mono border border-primary/10">$1</code>');
+  // Headings with decorative accents
+  html = html.replace(/^### (.+)$/gm, '<h3 class="text-base font-semibold mt-6 mb-2 text-foreground flex items-center gap-2"><span class="h-1 w-4 rounded-full bg-primary/60 shrink-0"></span>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2 class="text-lg font-bold mt-8 mb-3 text-foreground pb-2 border-b border-primary/15">$1</h2>');
   html = html.replace(/^# (.+)$/gm, '<h1 class="text-2xl font-bold mt-6 mb-4 text-foreground">$1</h1>');
+  // Bold and italic
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-foreground">$1</strong>');
   html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600 underline underline-offset-2">$1</a>');
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<span class="text-muted-foreground text-sm italic">[Image: $1]</span>');
-  html = html.replace(/^---$/gm, '<hr class="border-border/50 my-4" />');
-  html = html.replace(/^[-*] (.+)$/gm, '<li class="ml-4 list-disc text-muted-foreground">$1</li>');
-  html = html.replace(/^\d+\. (.+)$/gm, '<li class="ml-4 list-decimal text-muted-foreground">$1</li>');
-  html = html.replace(/^(?!<[huplo]|<li|<hr|<pre|<code|<span|<strong|<em|<a|<div)(.+)$/gm, '<p class="text-muted-foreground leading-relaxed my-1">$1</p>');
-  html = html.replace(/<img[^>]*shields\.io[^>]*>/g, '');
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-primary/80 underline decoration-primary/30 hover:decoration-primary/60 underline-offset-2 transition-colors">$1</a>');
+  // Images → placeholder
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<span class="text-muted-foreground text-sm italic">[Изображение: $1]</span>');
+  // Horizontal rules
+  html = html.replace(/^---$/gm, '<hr class="border-border/30 my-6" />');
+  // Unordered list items with custom bullet
+  html = html.replace(/^[-*] (.+)$/gm, '<li class="ml-5 pl-1 list-none text-foreground/80 before:content-[\'•\'] before:text-primary before:absolute before:-ml-4 relative leading-relaxed">$1</li>');
+  // Ordered list items
+  html = html.replace(/^\d+\. (.+)$/gm, '<li class="ml-5 pl-1 list-decimal text-foreground/80 marker:text-primary/60 leading-relaxed">$1</li>');
+  // Paragraphs — avoid wrapping already-tagged content
+  html = html.replace(/^(?!<[huplo]|<li|<hr|<pre|<code|<span|<strong|<em|<a|<div)(.+)$/gm, '<p class="text-foreground/70 leading-relaxed my-2">$1</p>');
   return html;
 }
 
