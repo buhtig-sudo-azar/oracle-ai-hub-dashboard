@@ -1091,7 +1091,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
       </CardHeader>
       <CardContent className="relative space-y-3 sm:space-y-4">
-        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-none">{project.description}</p>
+        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{project.description}</p>
 
         <div className="flex flex-wrap gap-1 sm:gap-1.5">
           {project.stack.slice(0, 4).map((s) => (
@@ -1216,7 +1216,7 @@ function WorkshopCard({ workshop }: { workshop: (typeof workshops)[0] }) {
         <div className="flex items-start justify-between gap-2">
           <CardTitle className="text-sm sm:text-base leading-tight flex items-center gap-1.5 sm:gap-2 min-w-0">
             <GraduationCap className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary shrink-0" />
-            <Link href={`/project/${workshop.id}`} className="hover:underline hover:text-primary transition-colors truncate">
+            <Link href={`/project/${workshop.id}`} className="hover:underline hover:text-primary transition-colors">
               {workshop.name}
             </Link>
           </CardTitle>
@@ -1226,7 +1226,7 @@ function WorkshopCard({ workshop }: { workshop: (typeof workshops)[0] }) {
         </div>
       </CardHeader>
       <CardContent className="space-y-2 sm:space-y-3">
-        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-none">{workshop.description}</p>
+        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{workshop.description}</p>
         <div className="flex flex-wrap gap-1 sm:gap-1.5">
           {workshop.stack.map((s) => (
             <Badge key={s} variant="secondary" className="text-[10px] sm:text-xs font-normal">
@@ -1316,21 +1316,18 @@ function NotebookCard({ notebook }: { notebook: (typeof notebooks)[0] }) {
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:underline hover:text-orange-500 transition-colors truncate"
+              className="hover:underline hover:text-orange-500 transition-colors"
             >
               {notebook.name}
             </a>
           </CardTitle>
-          <Badge className={`${categoryColor[notebook.category] || "bg-gray-500/15 text-gray-600 border-gray-500/25"} shrink-0 text-[10px] sm:text-xs hidden sm:inline-flex`}>
+          <Badge className={`${categoryColor[notebook.category] || "bg-gray-500/15 text-gray-600 border-gray-500/25"} shrink-0 text-[10px] sm:text-xs`}>
             {categoryLabelFull[notebook.category] || notebook.category}
-          </Badge>
-          <Badge className={`${categoryColor[notebook.category] || "bg-gray-500/15 text-gray-600 border-gray-500/25"} shrink-0 text-[10px] sm:hidden`}>
-            {categoryLabel[notebook.category] || notebook.category}
           </Badge>
         </div>
       </CardHeader>
       <CardContent className="space-y-2 sm:space-y-3">
-        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2 sm:line-clamp-none">{notebook.description}</p>
+        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{notebook.description}</p>
         <div className="flex flex-wrap gap-1 sm:gap-1.5">
           {notebook.stack.map((s) => (
             <Badge key={s} variant="secondary" className="text-[10px] sm:text-xs font-normal">
@@ -1580,22 +1577,18 @@ export default function DashboardPage() {
 
         {/* Tabs */}
         <Tabs value={tab} onValueChange={setTab} className="space-y-4">
-          <TabsList className="grid w-full grid-cols-4 max-w-full sm:max-w-lg">
-            <TabsTrigger value="apps" className="gap-0.5 sm:gap-1.5 text-[10px] sm:text-xs md:text-sm px-1 sm:px-3">
-              <Cpu className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" /> <span className="truncate">Прил.</span>
-              <span className="hidden sm:inline">ожения</span> ({projects.filter((p) => p.category === "app").length})
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="apps" className="gap-1 text-xs sm:text-sm px-2 sm:px-3">
+              <Cpu className="h-3.5 w-3.5 shrink-0" /> Приложения ({projects.filter((p) => p.category === "app").length})
             </TabsTrigger>
-            <TabsTrigger value="workshops" className="gap-0.5 sm:gap-1.5 text-[10px] sm:text-xs md:text-sm px-1 sm:px-3">
-              <GraduationCap className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" /> <span className="truncate">Ворк.</span>
-              <span className="hidden sm:inline">шопы</span> ({workshops.length})
+            <TabsTrigger value="workshops" className="gap-1 text-xs sm:text-sm px-2 sm:px-3">
+              <GraduationCap className="h-3.5 w-3.5 shrink-0" /> Воркшопы ({workshops.length})
             </TabsTrigger>
-            <TabsTrigger value="notebooks" className="gap-0.5 sm:gap-1.5 text-[10px] sm:text-xs md:text-sm px-1 sm:px-3">
-              <BookOpen className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" /> <span className="truncate">Нутб.</span>
-              <span className="hidden sm:inline">уки</span> ({notebooks.length})
+            <TabsTrigger value="notebooks" className="gap-1 text-xs sm:text-sm px-2 sm:px-3">
+              <BookOpen className="h-3.5 w-3.5 shrink-0" /> Ноутбуки ({notebooks.length})
             </TabsTrigger>
-            <TabsTrigger value="explorer" className="gap-0.5 sm:gap-1.5 text-[10px] sm:text-xs md:text-sm px-1 sm:px-3">
-              <Brain className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" /> <span className="hidden sm:inline">Explorer</span>
-              <span className="sm:hidden">Exp</span>
+            <TabsTrigger value="explorer" className="gap-1 text-xs sm:text-sm px-2 sm:px-3">
+              <Brain className="h-3.5 w-3.5 shrink-0" /> Explorer
             </TabsTrigger>
           </TabsList>
 
