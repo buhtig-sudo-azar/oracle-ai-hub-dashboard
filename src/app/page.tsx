@@ -64,6 +64,9 @@ import {
   Moon,
   Menu,
   X,
+  Download,
+  Copy,
+  Check,
 } from "lucide-react";
 
 import {
@@ -1260,6 +1263,26 @@ function WorkshopCard({ workshop }: { workshop: (typeof workshops)[0] }) {
 function NotebookCard({ notebook }: { notebook: (typeof notebooks)[0] }) {
   const colabUrl = `${COLAB_BASE}/${notebook.filePath}`;
   const githubUrl = `${GITHUB_BASE}/${notebook.filePath}`;
+  const rawUrl = `https://raw.githubusercontent.com/oracle-devrel/oracle-ai-developer-hub/main/${notebook.filePath}`;
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(colabUrl).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  const handleDownload = () => {
+    const a = document.createElement("a");
+    a.href = rawUrl;
+    a.download = notebook.filePath.split("/").pop() || "notebook.ipynb";
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
 
   const categoryLabel: Record<string, string> = {
     rag: "RAG",
@@ -1295,7 +1318,7 @@ function NotebookCard({ notebook }: { notebook: (typeof notebooks)[0] }) {
           <CardTitle className="text-sm sm:text-base leading-tight flex items-center gap-1.5 sm:gap-2 min-w-0">
             <BookOpen className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-orange-500 shrink-0" />
             <a
-              href={colabUrl}
+              href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:underline hover:text-orange-500 transition-colors truncate"
@@ -1326,11 +1349,34 @@ function NotebookCard({ notebook }: { notebook: (typeof notebooks)[0] }) {
               <Play className="h-3 w-3" /> <span className="sm:hidden">Colab</span><span className="hidden sm:inline">Открыть в Colab</span>
             </Button>
           </a>
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-1 text-[10px] sm:text-xs h-7 sm:h-8"
+            onClick={handleDownload}
+          >
+            <Download className="h-3 w-3" /> <span className="sm:hidden">.ipynb</span><span className="hidden sm:inline">Скачать .ipynb</span>
+          </Button>
           <a href={githubUrl} target="_blank" rel="noopener noreferrer">
             <Button variant="outline" size="sm" className="gap-1 text-[10px] sm:text-xs h-7 sm:h-8">
               <ExternalLink className="h-3 w-3" /> GitHub
             </Button>
           </a>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="gap-1 text-[10px] sm:text-xs h-7 sm:h-8 px-2"
+                  onClick={handleCopyLink}
+                >
+                  {copied ? <Check className="h-3 w-3 text-emerald-500" /> : <Copy className="h-3 w-3" />}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>Скопировать ссылку Colab</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </CardContent>
     </Card>
