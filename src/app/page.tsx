@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -757,6 +758,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
         {/* Action buttons - real clickable links */}
         <div className="flex flex-wrap gap-2 pt-1">
+          <Link href={`/project/${project.id}`}>
+            <Button size="sm" className="gap-1.5 text-xs bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0">
+              <FileSearch className="h-3 w-3" /> Открыть проект
+            </Button>
+          </Link>
           {project.liveUrl && (
             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
               <Button size="sm" className="gap-1.5 text-xs">
@@ -770,7 +776,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             rel="noopener noreferrer"
           >
             <Button variant="outline" size="sm" className="gap-1.5 text-xs">
-              <ExternalLink className="h-3 w-3" /> Исходный код
+              <ExternalLink className="h-3 w-3" /> GitHub
             </Button>
           </a>
           <Dialog>
