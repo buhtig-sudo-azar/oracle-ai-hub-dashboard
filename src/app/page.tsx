@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import {
   Card,
   CardContent,
@@ -59,6 +60,10 @@ import {
   Filter,
   Cloud,
   Play,
+  Sun,
+  Moon,
+  Menu,
+  X,
 } from "lucide-react";
 
 import {
@@ -1009,19 +1014,19 @@ function HeroStats() {
   const withUI = apps.filter((p) => p.hasWebUI).length;
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
       {[
-        { label: "Приложений", value: apps.length, icon: <Cpu className="h-4 w-4" /> },
-        { label: "Ноутбуков", value: notebooks.length, icon: <BookOpen className="h-4 w-4" /> },
-        { label: "Локально запускаемых", value: local + partial, icon: <CheckCircle2 className="h-4 w-4" /> },
-        { label: "С веб-интерфейсом", value: withUI, icon: <Globe className="h-4 w-4" /> },
+        { label: "Приложений", value: apps.length, icon: <Cpu className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> },
+        { label: "Ноутбуков", value: notebooks.length, icon: <BookOpen className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> },
+        { label: "Локально", value: local + partial, icon: <CheckCircle2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> },
+        { label: "С веб-UI", value: withUI, icon: <Globe className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> },
       ].map((s) => (
         <Card key={s.label} className="bg-card/50 backdrop-blur border-border/50">
-          <CardContent className="p-4 flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10 text-primary">{s.icon}</div>
+          <CardContent className="p-2.5 sm:p-4 flex items-center gap-2 sm:gap-3">
+            <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10 text-primary">{s.icon}</div>
             <div>
-              <div className="text-2xl font-bold">{s.value}</div>
-              <div className="text-xs text-muted-foreground">{s.label}</div>
+              <div className="text-lg sm:text-2xl font-bold">{s.value}</div>
+              <div className="text-[10px] sm:text-xs text-muted-foreground leading-tight">{s.label}</div>
             </div>
           </CardContent>
         </Card>
@@ -1409,6 +1414,12 @@ export default function DashboardPage() {
   const [filter, setFilter] = useState<"all" | "fully_local" | "partial_local" | "cloud_required">("all");
   const [tab, setTab] = useState("apps");
   const [notebookFilter, setNotebookFilter] = useState<string>("all");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Avoid hydration mismatch
+  useMemo(() => { setMounted(true); }, []);
 
   const filteredApps = useMemo(() => {
     const apps = projects.filter((p) => p.category === "app");
@@ -1420,20 +1431,60 @@ export default function DashboardPage() {
     <div className="min-h-screen flex flex-col bg-background">
       {/* Header */}
       <header className="border-b border-border/50 bg-background/80 backdrop-blur-lg sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div>
-              <h1 className="text-xl sm:text-2xl font-bold tracking-tight flex items-center gap-2">
-                <div className="p-1.5 rounded-lg bg-primary/10">
-                  <Bot className="h-5 w-5 text-primary" />
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 py-3 sm:py-4">
+          <div className="flex items-center justify-between">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-base sm:text-xl md:text-2xl font-bold tracking-tight flex items-center gap-2">
+                <div className="p-1 sm:p-1.5 rounded-lg bg-primary/10 shrink-0">
+                  <Bot className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                 </div>
-                <span className="gradient-text">Oracle AI Developer Hub</span>
+                <span className="gradient-text truncate">Oracle AI Developer Hub</span>
               </h1>
-              <p className="text-sm text-muted-foreground mt-0.5">
+              <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 hidden sm:block">
                 15+ AI проектов, ноутбуков и воркшопов — изучайте, запускайте, вдохновляйтесь
               </p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              {/* Theme toggle */}
+              {mounted && (
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="h-8 w-8 sm:h-9 sm:w-9"
+                  onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+                  title={resolvedTheme === "dark" ? "Светлая тема" : "Тёмная тема"}
+                >
+                  {resolvedTheme === "dark" ? (
+                    <Sun className="h-4 w-4 text-amber-400" />
+                  ) : (
+                    <Moon className="h-4 w-4 text-slate-700" />
+                  )}
+                </Button>
+              )}
+              <a
+                href="https://github.com/oracle-devrel/oracle-ai-developer-hub"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex"
+              >
+                <Button variant="outline" size="sm" className="gap-2">
+                  <ExternalLink className="h-3.5 w-3.5" /> GitHub
+                </Button>
+              </a>
+              {/* Mobile menu toggle */}
+              <Button
+                variant="outline"
+                size="icon"
+                className="h-8 w-8 sm:hidden"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              </Button>
+            </div>
+          </div>
+          {/* Mobile menu */}
+          {mobileMenuOpen && (
+            <div className="sm:hidden mt-3 pt-3 border-t border-border/50 flex items-center gap-2">
               <a
                 href="https://github.com/oracle-devrel/oracle-ai-developer-hub"
                 target="_blank"
@@ -1444,7 +1495,7 @@ export default function DashboardPage() {
                 </Button>
               </a>
             </div>
-          </div>
+          )}
         </div>
       </header>
 
@@ -1460,18 +1511,22 @@ export default function DashboardPage() {
 
         {/* Tabs */}
         <Tabs value={tab} onValueChange={setTab} className="space-y-4">
-          <TabsList className="grid w-full grid-cols-4 max-w-lg">
-            <TabsTrigger value="apps" className="gap-1.5 text-xs sm:text-sm">
-              <Cpu className="h-3.5 w-3.5" /> Приложения ({projects.filter((p) => p.category === "app").length})
+          <TabsList className="grid w-full grid-cols-4 max-w-full sm:max-w-lg">
+            <TabsTrigger value="apps" className="gap-0.5 sm:gap-1.5 text-[10px] sm:text-xs md:text-sm px-1 sm:px-3">
+              <Cpu className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" /> <span className="truncate">Прил.</span>
+              <span className="hidden sm:inline">ожения</span> ({projects.filter((p) => p.category === "app").length})
             </TabsTrigger>
-            <TabsTrigger value="workshops" className="gap-1.5 text-xs sm:text-sm">
-              <GraduationCap className="h-3.5 w-3.5" /> Воркшопы ({workshops.length})
+            <TabsTrigger value="workshops" className="gap-0.5 sm:gap-1.5 text-[10px] sm:text-xs md:text-sm px-1 sm:px-3">
+              <GraduationCap className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" /> <span className="truncate">Ворк.</span>
+              <span className="hidden sm:inline">шопы</span> ({workshops.length})
             </TabsTrigger>
-            <TabsTrigger value="notebooks" className="gap-1.5 text-xs sm:text-sm">
-              <BookOpen className="h-3.5 w-3.5" /> Ноутбуки ({notebooks.length})
+            <TabsTrigger value="notebooks" className="gap-0.5 sm:gap-1.5 text-[10px] sm:text-xs md:text-sm px-1 sm:px-3">
+              <BookOpen className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" /> <span className="truncate">Нутб.</span>
+              <span className="hidden sm:inline">уки</span> ({notebooks.length})
             </TabsTrigger>
-            <TabsTrigger value="explorer" className="gap-1.5 text-xs sm:text-sm">
-              <Brain className="h-3.5 w-3.5" /> Explorer
+            <TabsTrigger value="explorer" className="gap-0.5 sm:gap-1.5 text-[10px] sm:text-xs md:text-sm px-1 sm:px-3">
+              <Brain className="h-3 w-3 sm:h-3.5 sm:w-3.5 shrink-0" /> <span className="hidden sm:inline">Explorer</span>
+              <span className="sm:hidden">Exp</span>
             </TabsTrigger>
           </TabsList>
 
