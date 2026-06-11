@@ -12,38 +12,23 @@ interface FileEntry {
   extension?: string;
 }
 
-function getDirectoryTree(dirPath: string, relativeTo: string, maxDepth = 2, currentDepth = 0): FileEntry[] {
+// Shallow scan - only top 2 levels, skip heavy dirs
+function getDirectoryTree(dirPath: string, maxDepth = 1, currentDepth = 0, prefix = ""): FileEntry[] {
   if (currentDepth >= maxDepth) return [];
   try {
     const entries = fs.readdirSync(dirPath, { withFileTypes: true });
     const result: FileEntry[] = [];
-    // Sort: directories first, then files
-    const sorted = entries.sort((a, b) => {
-      if (a.isDirectory() && !b.isDirectory()) return -1;
-      if (!a.isDirectory() && b.isDirectory()) return 1;
-      return a.name.localeCompare(b.name);
-    });
-    for (const entry of sorted) {
-      // Skip hidden dirs, node_modules, __pycache__, .git, etc.
-      if (entry.name.startsWith(".") || entry.name === "node_modules" || entry.name === "__pycache__" || entry.name === ".git") continue;
+    for (const entry of entries) {
+      if (entry.name.startsWith(".") || entry.name === "node_modules" || entry.name === "__pycache__" || entry.name === ".git" || entry.name === "out" || entry.name === "dist" || entry.name === "build" || entry.name === ".next") continue;
       const fullPath = path.join(dirPath, entry.name);
-      const relPath = path.relative(relativeTo, fullPath);
+      const relPath = prefix ? `${prefix}/${entry.name}` : entry.name;
       if (entry.isDirectory()) {
-        result.push({
-          name: entry.name,
-          path: relPath,
-          type: "directory",
-        });
+        result.push({ name: entry.name, path: relPath, type: "directory" });
       } else {
-        const ext = path.extname(entry.name).toLowerCase();
-        const stat = fs.statSync(fullPath);
-        result.push({
-          name: entry.name,
-          path: relPath,
-          type: "file",
-          size: stat.size,
-          extension: ext,
-        });
+        try {
+          const stat = fs.statSync(fullPath);
+          result.push({ name: entry.name, path: relPath, type: "file", size: stat.size, extension: path.extname(entry.name).toLowerCase() });
+        } catch { /* skip */ }
       }
     }
     return result;
@@ -52,7 +37,6 @@ function getDirectoryTree(dirPath: string, relativeTo: string, maxDepth = 2, cur
   }
 }
 
-// Project ID to repo path mapping
 const PROJECT_MAP: Record<string, { repoPath: string; type: "app" | "workshop" | "notebook" }> = {
   "agent-reasoning": { repoPath: "apps/agent-reasoning", type: "app" },
   "picooraclaw": { repoPath: "apps/picooraclaw", type: "app" },
@@ -76,100 +60,73 @@ const PROJECT_MAP: Record<string, { repoPath: string; type: "app" | "workshop" |
   "supplychain-ws": { repoPath: "workshops/supplychain_demand_agent_workshop", type: "workshop" },
 };
 
-export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const { id } = await params;
-  const projectInfo = PROJECT_MAP[id];
-
-  if (!projectInfo) {
-    return NextResponse.json({ error: "Project not found" }, { status: 404 });
-  }
-
-  const projectDir = path.join(REPO_ROOT, projectInfo.repoPath);
-
-  if (!fs.existsSync(projectDir)) {
-    return NextResponse.json({ error: "Project directory not found on disk", path: projectInfo.repoPath }, { status: 404 });
-  }
-
-  // Read README
-  let readme = "";
-  const readmeNames = ["README.md", "readme.md", "Readme.md"];
-  for (const name of readmeNames) {
-    const readmePath = path.join(projectDir, name);
-    if (fs.existsSync(readmePath)) {
-      readme = fs.readFileSync(readmePath, "utf-8");
-      break;
-    }
-  }
-
-  // Get file tree
-  const fileTree = getDirectoryTree(projectDir, projectDir, 3);
-
-  // Get project stats
-  const totalFiles = countFiles(projectDir, 0);
-  const totalSize = getDirSize(projectDir);
-
-  return NextResponse.json({
-    id,
-    repoPath: projectInfo.repoPath,
-    type: projectInfo.type,
-    readme,
-    fileTree,
-    stats: {
-      totalFiles,
-      totalSize,
-      totalSizeFormatted: formatBytes(totalSize),
-    },
-    githubUrl: `https://github.com/oracle-devrel/oracle-ai-developer-hub/tree/main/${projectInfo.repoPath}`,
-  });
-}
-
-function countFiles(dirPath: string, depth: number): number {
-  if (depth > 5) return 0;
-  try {
-    let count = 0;
-    const entries = fs.readdirSync(dirPath, { withFileTypes: true });
-    for (const entry of entries) {
-      if (entry.name.startsWith(".") || entry.name === "node_modules" || entry.name === "__pycache__") continue;
-      if (entry.isDirectory()) {
-        count += countFiles(path.join(dirPath, entry.name), depth + 1);
-      } else {
-        count++;
-      }
-    }
-    return count;
-  } catch {
-    return 0;
-  }
-}
-
-function getDirSize(dirPath: string): number {
-  try {
-    let size = 0;
-    const entries = fs.readdirSync(dirPath, { withFileTypes: true });
-    for (const entry of entries) {
-      if (entry.name.startsWith(".") || entry.name === "node_modules" || entry.name === "__pycache__") continue;
-      const fullPath = path.join(dirPath, entry.name);
-      if (entry.isDirectory()) {
-        size += getDirSize(fullPath);
-      } else {
-        try {
-          size += fs.statSync(fullPath).size;
-        } catch { /* skip */ }
-      }
-    }
-    return size;
-  } catch {
-    return 0;
-  }
-}
-
 function formatBytes(bytes: number): string {
   if (bytes === 0) return "0 B";
   const k = 1024;
   const sizes = ["B", "KB", "MB", "GB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
+}
+
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    const projectInfo = PROJECT_MAP[id];
+
+    if (!projectInfo) {
+      return NextResponse.json({ error: "Project not found" }, { status: 404 });
+    }
+
+    const projectDir = path.join(REPO_ROOT, projectInfo.repoPath);
+
+    if (!fs.existsSync(projectDir)) {
+      return NextResponse.json({ error: "Project directory not found on disk", path: projectInfo.repoPath }, { status: 404 });
+    }
+
+    // Read README (limit size)
+    let readme = "";
+    const readmeNames = ["README.md", "readme.md", "Readme.md"];
+    for (const name of readmeNames) {
+      const readmePath = path.join(projectDir, name);
+      if (fs.existsSync(readmePath)) {
+        try {
+          const buf = fs.readFileSync(readmePath, { encoding: "utf-8" });
+          readme = buf.substring(0, 50000); // Cap at 50KB
+        } catch { /* skip */ }
+        break;
+      }
+    }
+
+    // Get file tree (shallow - 1 level)
+    const fileTree = getDirectoryTree(projectDir, 1, 0);
+
+    // Simple file count (top level only)
+    let totalFiles = 0;
+    try {
+      const entries = fs.readdirSync(projectDir, { withFileTypes: true });
+      for (const entry of entries) {
+        if (!entry.name.startsWith(".") && entry.name !== "node_modules") totalFiles++;
+      }
+    } catch { /* skip */ }
+
+    return NextResponse.json({
+      id,
+      repoPath: projectInfo.repoPath,
+      type: projectInfo.type,
+      readme,
+      fileTree,
+      stats: {
+        totalFiles,
+        totalSize: 0,
+        totalSizeFormatted: "N/A",
+      },
+      githubUrl: `https://github.com/oracle-devrel/oracle-ai-developer-hub/tree/main/${projectInfo.repoPath}`,
+    });
+  } catch (err) {
+    console.error("API Error:", err);
+    return NextResponse.json({ error: "Internal server error", details: String(err) }, { status: 500 });
+  }
 }

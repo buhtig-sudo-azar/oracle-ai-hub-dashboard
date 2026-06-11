@@ -725,7 +725,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <div className="flex items-center gap-3">
             <div className={`p-2 rounded-lg bg-muted ${project.color}`}>{project.icon}</div>
             <div>
-              <CardTitle className="text-lg leading-tight">{project.name}</CardTitle>
+              <Link href={`/project/${project.id}`} className="hover:underline">
+                <CardTitle className="text-lg leading-tight group-hover:text-primary transition-colors">{project.name}</CardTitle>
+              </Link>
               <div className="mt-1">{runnabilityBadge(project.runnability)}</div>
             </div>
           </div>
@@ -832,10 +834,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               </div>
               {/* Links in dialog */}
               <div className="flex flex-wrap gap-2 pt-2 border-t border-border/50">
+                <Link href={`/project/${project.id}`}>
+                  <Button size="sm" className="gap-1.5 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0">
+                    <FileSearch className="h-3.5 w-3.5" /> Открыть проект
+                  </Button>
+                </Link>
                 {project.liveUrl && (
                   <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                     <Button size="sm" className="gap-1.5">
-                      <Globe className="h-3.5 w-3.5" /> Открыть Live демо
+                      <Globe className="h-3.5 w-3.5" /> Live демо
                     </Button>
                   </a>
                 )}
@@ -865,7 +872,9 @@ function WorkshopCard({ workshop }: { workshop: (typeof workshops)[0] }) {
         <div className="flex items-start justify-between gap-2">
           <CardTitle className="text-base leading-tight flex items-center gap-2">
             <GraduationCap className="h-4 w-4 text-primary shrink-0" />
-            {workshop.name}
+            <Link href={`/project/${workshop.id}`} className="hover:underline hover:text-primary transition-colors">
+              {workshop.name}
+            </Link>
           </CardTitle>
           <Badge className={`${difficultyColor(workshop.difficulty)} shrink-0`}>
             {workshop.difficulty}
@@ -881,16 +890,22 @@ function WorkshopCard({ workshop }: { workshop: (typeof workshops)[0] }) {
             </Badge>
           ))}
         </div>
-        <a
-          href={`https://github.com/oracle-devrel/oracle-ai-developer-hub/tree/main/${workshop.githubPath}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block"
-        >
-          <Button variant="outline" size="sm" className="gap-1.5 text-xs">
-            <ExternalLink className="h-3 w-3" /> Открыть на GitHub
-          </Button>
-        </a>
+        <div className="flex flex-wrap gap-2">
+          <Link href={`/project/${workshop.id}`}>
+            <Button size="sm" className="gap-1.5 text-xs bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white border-0">
+              <FileSearch className="h-3 w-3" /> Открыть проект
+            </Button>
+          </Link>
+          <a
+            href={`https://github.com/oracle-devrel/oracle-ai-developer-hub/tree/main/${workshop.githubPath}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+              <ExternalLink className="h-3 w-3" /> GitHub
+            </Button>
+          </a>
+        </div>
       </CardContent>
     </Card>
   );
